@@ -1,9 +1,17 @@
 set nocompatible               " be iMproved
- filetype off                   " required!
+filetype off                   " required!
 
+set nu
 set encoding=utf-8
 set fileencoding=utf-8
+set shiftwidth=2
+set hlsearch
+set incsearch
 
+let mapleader=","
+
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
  map <F2> :NERDTreeToggle<CR>
  " Powerline setup
