@@ -1,8 +1,7 @@
 "Customize vimrc
 filetype plugin on     " required!
-filetype indent on                   " required!
+filetype indent on     " required!
 execute pathogen#infect()
-syntax on
 
 "Sets how many lines of history vim has to remember
 set history=666
@@ -29,9 +28,13 @@ set tm=500
 
 set nocompatible               " be iMproved
 
+"Set 7 lines to the cursor when moving vertically using j/k
+set so=7
+
 "show the line number
 set nu
 
+" Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -45,8 +48,28 @@ set hlsearch
 set incsearch
 
 "No .swap files and backup
+"use git
 set nobackup
 set noswapfile
+set nowb
+
+"Height of the command bar
+set cmdheight=2
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+
 
 
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
