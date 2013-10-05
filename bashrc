@@ -188,12 +188,6 @@ alias cl='clear'
 alias du='du -ch --max-depth=1'
 alias treeacl='tree -A -C -L 2'
 
-# 2.3) Text and editor commands
-alias em='emacs -nw'     # No X11 windows
-alias eqq='emacs -nw -Q' # No config and no X11
-export EDITOR='emacs -nw'
-export VISUAL='emacs -nw' 
-
 # 2.4) grep options
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;31' # green for matches
@@ -229,3 +223,4 @@ alias py="/opt/python3.3/bin/python3.3"
 alias gitlog='git log --graph'
 export MOZILLA_FIVE_HOME=/usr/lib/mozilla
 export LD_LIBRARY_PATH=${MOZILLA_FIVE_HOME}:${LD_LIBRARY_PATH}
+set -o vi

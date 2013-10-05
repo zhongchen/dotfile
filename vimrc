@@ -1,6 +1,9 @@
 "Customize vimrc
+"Enable filetype plugins
 filetype plugin on     " required!
 filetype indent on     " required!
+
+"enalbe pathogen
 execute pathogen#infect()
 
 "Sets how many lines of history vim has to remember
@@ -16,6 +19,9 @@ let g:mapleader = ","
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 "Always show current position
 set ruler
@@ -62,6 +68,9 @@ set cmdheight=2
 " Enable syntax highlighting
 syntax enable
 
+"background color
+set background=dark
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -78,4 +87,9 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
  map <F2> :NERDTreeToggle<CR>
 
 
- 
+"temp setup
+"Disable some keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
