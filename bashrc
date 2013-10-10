@@ -218,9 +218,10 @@ fi
 ## ------------------------------
 
 ## Define any user-specific variables you want here.
-source ~/.bashrc_custom
+#source ~/.bashrc_custom
 alias py="/opt/python3.3/bin/python3.3"
 alias gitlog='git log --graph'
 export MOZILLA_FIVE_HOME=/usr/lib/mozilla
 export LD_LIBRARY_PATH=${MOZILLA_FIVE_HOME}:${LD_LIBRARY_PATH}
 set -o vi
+export CSCOPE_DB=~/cscope.out

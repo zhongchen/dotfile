@@ -4,7 +4,7 @@ filetype plugin on     " required!
 filetype indent on     " required!
 
 "enalbe pathogen
-execute pathogen#infect()
+"execute pathogen#infect()
 
 "Sets how many lines of history vim has to remember
 set history=666
