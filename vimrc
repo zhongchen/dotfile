@@ -1,3 +1,6 @@
+"not compatible with vi, improve performance
+set nocompatible               
+
 "enalbe pathogen
 "execute pathogen#infect()
 call pathogen#incubate() 
@@ -33,8 +36,6 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
-set nocompatible               " be iMproved
 
 "Set 7 lines to the cursor when moving vertically using j/k
 set so=7

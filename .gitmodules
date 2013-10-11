@@ -6,3 +6,7 @@
 	path = .vim/bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim
         ignore=dirty
+[submodule ".vim/bundle/clang_complete"]
+	path = .vim/bundle/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete
+        ignore=dirty
