@@ -1,26 +1,26 @@
 "not compatible with vi, improve performance
 set nocompatible               
 
+"force reloading after pathogen loaded
+filetype off
+
 "enalbe pathogen
 "execute pathogen#infect()
 call pathogen#incubate() 
 call pathogen#helptags()
 "Customize vimrc
-"Enable filetype plugins
-filetype plugin on     " required!
-filetype indent on     " required!
+"Enable plugin and indenting plugins
+filetype plugin indent on
 
+"change the mapleader from \ to ,
+let mapleader = ","
+let g:mapleader = ","
 
 "Sets how many lines of history vim has to remember
 set history=666
 
 " Set to auto read when a file is changed from the outside
 set autoread
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -81,14 +81,11 @@ set background=dark
 map j gj
 map k gk
 
-
-
+"enable mouse
+set mouse=a
 
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
- map <F2> :NERDTreeToggle<CR>
-
 
 "temp setup
 "Disable some keys
@@ -96,3 +93,23 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
+
+"My personal mapping
+inoremap <c-d> <esc>ddi
+inoremap <c-l> <del>
+
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+"Toggle paste mode on and off
+nnoremap <leader>pp :setlocal paste!<cr>
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction
