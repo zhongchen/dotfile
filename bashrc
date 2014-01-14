@@ -1,45 +1,3 @@
-# .bashrc file
-# By Balaji S. Srinivasan (balajis@stanford.edu)
-#
-# Concepts:
-#
-#    1) .bashrc is the *non-login* config for bash, run in scripts and after
-#        first connection.
-#    2) .bash_profile is the *login* config for bash, launched upon first connection.
-#    3) .bash_profile imports .bashrc, but not vice versa.
-#    4) .bashrc imports .bashrc_custom, which can be used to override
-#        variables specified here.
-#           
-# When using GNU screen:
-#
-#    1) .bash_profile is loaded the first time you login, and should be used
-#       only for paths and environmental settings
-
-#    2) .bashrc is loaded in each subsequent screen, and should be used for
-#       aliases and things like writing to .bash_eternal_history (see below)
-#
-# Do 'man bashrc' for the long version or see here:
-# http://en.wikipedia.org/wiki/Bash#Startup_scripts
-#
-# When Bash starts, it executes the commands in a variety of different scripts.
-#
-#   1) When Bash is invoked as an interactive login shell, it first reads
-#      and executes commands from the file /etc/profile, if that file
-#      exists. After reading that file, it looks for ~/.bash_profile,
-#      ~/.bash_login, and ~/.profile, in that order, and reads and executes
-#      commands from the first one that exists and is readable.
-#
-#   2) When a login shell exits, Bash reads and executes commands from the
-#      file ~/.bash_logout, if it exists.
-#
-#   3) When an interactive shell that is not a login shell is started
-#      (e.g. a GNU screen session), Bash reads and executes commands from
-#      ~/.bashrc, if that file exists. This may be inhibited by using the
-#      --norc option. The --rcfile file option will force Bash to read and
-#      execute commands from file instead of ~/.bashrc.
-
-
-
 # -----------------------------------
 # -- 1.1) Set up umask permissions --
 # -----------------------------------
@@ -156,13 +114,13 @@ if [ "$PS1" ]; then
     fi
 fi
 
-# Append to history
-# See: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
-shopt -s histappend
-
 # Make prompt informative
-# See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
+# See: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
 PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
+
+# Append to history
+# See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
+shopt -s histappend
 
 ## -----------------------
 ## -- 2) Set up aliases --
@@ -176,11 +134,6 @@ set -o noclobber
 
 # 2.2) Listing, directories, and motion
 alias ll="ls -alrtF --color"
-alias la="ls -A"
-alias l="ls -CF"
-alias dir='ls --color=auto --format=vertical'
-alias vdir='ls --color=auto --format=long'
-alias m='less'
 alias ..='cd ..'
 alias ...='cd ..;cd ..'
 alias md='mkdir'
@@ -219,9 +172,3 @@ fi
 
 ## Define any user-specific variables you want here.
 #source ~/.bashrc_custom
-alias py="/opt/python3.3/bin/python3.3"
-alias gitlog='git log --graph'
-export MOZILLA_FIVE_HOME=/usr/lib/mozilla
-export LD_LIBRARY_PATH=${MOZILLA_FIVE_HOME}:${LD_LIBRARY_PATH}
-set -o vi
-export CSCOPE_DB=~/cscope.out
