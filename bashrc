@@ -114,9 +114,15 @@ if [ "$PS1" ]; then
     fi
 fi
 
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
 # Make prompt informative
 # See: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
-PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
+#PS1="\[\033[0;34m\][\u@\h:\w]$\[\033[0m\]"
 
 # Append to history
 # See:  http://www.ukuug.org/events/linux2003/papers/bash_tips/
@@ -172,3 +178,4 @@ fi
 
 ## Define any user-specific variables you want here.
 #source ~/.bashrc_custom
+unset color_prompt force_color_prompt
