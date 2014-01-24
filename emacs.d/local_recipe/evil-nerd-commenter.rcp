@@ -1,0 +1,6 @@
+(:name evil-nerd-commenter
+       :type git
+       :url "git://github.com/redguardtoo/evil-nerd-commenter.git"
+       :features evil-nerd-commenter
+       :post-init (evilnc-default-hotkeys)
+       )
