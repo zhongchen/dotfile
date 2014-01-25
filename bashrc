@@ -179,3 +179,5 @@ fi
 ## Define any user-specific variables you want here.
 #source ~/.bashrc_custom
 unset color_prompt force_color_prompt
+
+alias em='emacsclinet -t "$@"'

@@ -1,0 +1,11 @@
+*.elc
+*.pyc
+emacs.d/el-get/
+emacs.d/.smex-items
+emacs.d/elpa
+emacs.d/eshell
+ac-comphist.dat
+*~
+
+
+

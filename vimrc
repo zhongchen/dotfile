@@ -6,8 +6,8 @@ filetype off
 
 "enalbe pathogen
 "execute pathogen#infect()
-call pathogen#incubate() 
-call pathogen#helptags()
+"call pathogen#incubate() 
+"call pathogen#helptags()
 "Customize vimrc
 "Enable plugin and indenting plugins
 filetype plugin indent on
@@ -113,3 +113,5 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+set clipboard=unnamedplus
