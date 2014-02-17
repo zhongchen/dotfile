@@ -1,6 +1,13 @@
 ;the file contains the envrionment setting
 (message "start the envionment setting")
 
+;; UTF-8 please
+(setq locale-coding-system 'utf-8) ; pretty
+(set-terminal-coding-system 'utf-8) ; pretty
+(set-keyboard-coding-system 'utf-8) ; pretty
+(set-selection-coding-system 'utf-8) ; please
+(prefer-coding-system 'utf-8) ; with sugar on top
+
 ;; on to the visual settings
 (setq inhibit-splash-screen t)              ; no splash screen, thanks
 (line-number-mode 1)                        ; have line numbers and
@@ -64,4 +71,4 @@
 )
 
 (message "finish the environment setting")
-(provide 'environment_setting)
+(provide 'init_environment_setting)

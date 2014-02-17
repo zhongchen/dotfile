@@ -180,4 +180,4 @@ fi
 #source ~/.bashrc_custom
 unset color_prompt force_color_prompt
 
-alias em='emacsclinet -t "$@"'
+alias em='emacs -nw "$@"'

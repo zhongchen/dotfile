@@ -1,3 +1,26 @@
+;record time
+(setq emacs-load-start-time (current-time))
+
+(setq *spell-check-support-enabled* t)
+(setq *macbook-pro-support-enabled* t)
+(setq *is-a-mac* (eq system-type 'darwin))
+(setq *is-carbon-emacs* (and *is-a-mac* (eq window-system 'mac)))
+(setq *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
+(setq *win32* (eq system-type 'windows-nt) )
+(setq *cygwin* (eq system-type 'cygwin) )
+(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
+(setq *unix* (or *linux* (eq system-type 'usg-unix-v) (eq system-type 'berkeley-unix)) )
+(setq *linux-x* (and window-system *linux*) )
+(setq *xemacs* (featurep 'xemacs) )
+(setq *emacs23* (and (not *xemacs*) (or (>= emacs-major-version 23))) )
+(setq *emacs24* (and (not *xemacs*) (or (>= emacs-major-version 24))) )
+
+
+(add-to-list 'load-path "~/.emacs.d") 
+(require 'init_packages)
+(require 'init_environment_setting)
+(require 'init_keybinding)
+
 ;install el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get") 
 (unless (require 'el-get nil t)
@@ -11,7 +34,7 @@
 
 ; enalbe git shallow clone
 ; the commit history may be truncated
-; and I might not push to the depot
+; and push is limited
 (setq el-get-git-shallow-clone t)
 
 ;my own recipes, which will override the default ones
@@ -39,7 +62,9 @@
   '(el-get 
     color-theme
     color-theme-tango
-
+    nodejs-repl
+    ctags
+   
     ; vim
     evil
     evil-surround
@@ -49,16 +74,14 @@
     ; Completion
     auto-complete
     auto-complete-clang
-    ;auto-complete-yasnippet
-    ;yasnippet
+    auto-complete-yasnippet
+    yasnippet
     
     ; syntax checking
     flymake
 
     ; 
-    cl-lib
-    
-    ))
+    cl-lib))
 
 
 (setq my_packages
@@ -113,7 +136,7 @@
 
 ;(setq ac-auto-start nil)
 (setq ac-quick-help-delay 0.5)
-;; (ac-set-trigger-key "TAB")
+(ac-set-trigger-key "TAB")
 (define-key ac-mode-map  [(control tab)] 'auto-complete)
 (defun my-ac-config ()
   (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
@@ -133,14 +156,22 @@
       (mapcar (lambda (item)(concat "-I" item))
 	      (split-string
                "
- /usr/include/c++/4.8
- /usr/include/x86_64-linux-gnu/c++/4.8
- /usr/include/c++/4.8/backward
- /usr/lib/gcc/x86_64-linux-gnu/4.8/include
+ /usr/include/c++/4.9
+ /usr/include/x86_64-linux-gnu/c++/4.9
+ /usr/include/c++/4.9/backward
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include
  /usr/local/include
- /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed
  /usr/include/x86_64-linux-gnu
  /usr/include")))
 
+; yasnippet initialization
+;(require 'yasnippet)
+;(yas/initialize)
+;(yas/load-directory ~/.emac.d/el-get/yasnippet/snippets/text-mode")
+;(add-to-list 'ac-sources 'ac-source-yasnippet)
+
 (message "done with initialziation")
-(provide 'init)
+(when (require 'time-date nil t)
+   (message "Emacs startup time: %d seconds."
+    (time-to-seconds (time-since emacs-load-start-time))))
