@@ -58,6 +58,7 @@
     evil-surround
     evil-numbers
     evil-nerd-commenter
+    evil-matchit
 
     ; Completion
     auto-complete
@@ -67,6 +68,12 @@
     
     ; syntax checking
     flymake
+    
+    ; multiple windows
+    window-numbering
+
+    ; undo-tree
+    undo-tree
 
     ; 
     cl-lib))

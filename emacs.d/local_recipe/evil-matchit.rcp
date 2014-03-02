@@ -1,0 +1,7 @@
+(:name evil-matchit
+       :website "https://github.com/redguardtoo/evil-matchit"
+       :description "auto match tags with %"
+       :type github
+       :pkgname "redguardtoo/evil-matchit"
+       :features evil-matchit
+       :depends evil)

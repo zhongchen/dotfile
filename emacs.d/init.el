@@ -44,7 +44,12 @@
 (require 'evil)
 (evil-mode 1)
 
-;(require 'color-theme-solarized)
+(require 'ctags)
+(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
+(setq tags-revert-without-query t)
+(global-set-key (kbd "M-.") 'ctags-search)
+
+; enable solarized dark theme
 (color-theme-solarized-dark)
 
 ; load some random els.
@@ -57,6 +62,17 @@
 
 (require 'smooth-scrolling)
 (require 'whitespace)
+
+;evil match it
+(require 'evil-matchit)
+(global-evil-matchit-mode 1)
+
+; multiple windows
+(require 'window-numbering)
+(window-numbering-mode 1)
+
+; redo/undo  window configurations
+(winner-mode 1)
 
 ;auto complete
 (require 'auto-complete-config)
