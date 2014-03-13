@@ -1,0 +1,6 @@
+(:name sunrise-commander
+       :website "https://github.com/escherdragon/sunrise-commander"
+       :description "File Manager"
+       :type github
+       :pkgname "escherdragon/sunrise-commander"
+       :features sunrise-commander)

@@ -48,7 +48,6 @@
   my_packages
   '(el-get 
     color-theme
-    color-theme-tango
     solarized-theme
     nodejs-repl
     ctags
@@ -59,6 +58,7 @@
     evil-numbers
     evil-nerd-commenter
     evil-matchit
+    evil-leader
 
     ; Completion
     auto-complete
@@ -72,10 +72,29 @@
     ; multiple windows
     window-numbering
 
-    ; undo-tree
     undo-tree
 
-    ; 
+    ;python IDE 
+    python-mode
+    ropemacs
+    pymacs
+    jedi
+
+    ;orthodox file manager
+    ;sunrise-commander
+     
+    ;javascript IDE
+    js2-mode
+    js2-refactor
+    coffee-mode
+    zencoding-mode
+    js-comint
+    expand-region
+    smart-forward
+    powerline
+    ;jade-mode
+
+    ace-jump-mode
     cl-lib))
 
 (setq my_packages

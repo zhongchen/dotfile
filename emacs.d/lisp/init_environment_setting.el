@@ -8,6 +8,15 @@
 (set-selection-coding-system 'utf-8) ; please
 (prefer-coding-system 'utf-8) ; with sugar on top
 
+(global-hl-line-mode)                        ; highlight current line
+; disable line hightlight
+; turn on hl-line
+(global-hl-line-mode 1)
+; set current line color be the same as background
+(set-face-background 'hl-line "#fff") 
+; keep syntax highligting in the current line
+(set-face-foreground 'highlight nil)
+
 ;; on to the visual settings
 (setq inhibit-splash-screen t)              ; no splash screen, thanks
 (line-number-mode 1)                        ; have line numbers and
@@ -16,7 +25,6 @@
 (tool-bar-mode -1)                          ; no tool bar with icons
 (scroll-bar-mode -1)                        ; no scroll bars
 
-(global-hl-line-mode)                        ; highlight current line
 (global-linum-mode 1)                        ; add line numbers on the left
 
 (menu-bar-mode -1)
@@ -25,7 +33,7 @@
 ; no start up message
 (setq inhibit-startup-message t)
 
-;; Use the clipboard, pretty please, so that copy/paste "works"
+;; Use the clipboard so that copy/paste "works"
 (setq x-select-enable-clipboard t)
 
 ;; Navigate windows with M-<arrows>

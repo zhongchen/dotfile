@@ -22,8 +22,6 @@
 (require 'init_packages)
 (require 'init_environment_setting)
 (require 'init_keybinding)
-
-
 (require 'ffap)
 (require 'uniquify)
 (require 'ansi-color)
@@ -40,17 +38,27 @@
 (setq ido-use-filename-at-point 'guess)
 (setq ido-show-dot-for-dired t)
 
+; enable evil-leader before evil
+(require 'evil-leader)
+(global-evil-leader-mode 1)
+(evil-leader/set-leader ",")
+
 ;enable evil
 (require 'evil)
 (evil-mode 1)
+
+;evil match it
+(require 'evil-matchit)
+(global-evil-matchit-mode 1)
 
 (require 'ctags)
 (global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
 (setq tags-revert-without-query t)
 (global-set-key (kbd "M-.") 'ctags-search)
 
-; enable solarized dark theme
-(color-theme-solarized-dark)
+; enable color theme
+(require 'color-theme-mac-classic)
+(color-theme-mac-classic)
 
 ; load some random els.
 (add-to-list 'load-path "~/.emacs.d/packages/")
@@ -63,10 +71,6 @@
 (require 'smooth-scrolling)
 (require 'whitespace)
 
-;evil match it
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
-
 ; multiple windows
 (require 'window-numbering)
 (window-numbering-mode 1)
@@ -74,7 +78,17 @@
 ; redo/undo  window configurations
 (winner-mode 1)
 
+;quick jump
+(require 'ace-jump-mode)
+
+; set up python IDE
+(require 'init_python)
+
+; set up javascript IDE
+(require 'init_javascript)
+
 ;auto complete
+(require 'auto-complete)
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict")
 (ac-config-default)
