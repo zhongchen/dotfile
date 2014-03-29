@@ -22,4 +22,4 @@
 (evil-leader/set-key "k" 'kill-buffer)
 
 (message "successfully finish keybinding process")
-(provide 'init_keybinding)
+(provide 'init-keybinding)

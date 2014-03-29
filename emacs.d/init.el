@@ -1,4 +1,4 @@
-;record time
+;;; record time
 (setq emacs-load-start-time (current-time))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
@@ -19,9 +19,9 @@
 (setq *emacs24* (and (not *xemacs*) (or (>= emacs-major-version 24))) )
 
 
-(require 'init_packages)
-(require 'init_environment_setting)
-(require 'init_keybinding)
+(require 'init-packages)
+(require 'init-environment-setting)
+(require 'init-keybinding)
 (require 'ffap)
 (require 'uniquify)
 (require 'ansi-color)
@@ -29,6 +29,7 @@
 (require 'linum)
 (require 'dired-x)
 (require 'compile)
+(require 'cl-lib)
 
 ;; use ido for minibuffer completion
 (require 'ido)
@@ -81,20 +82,16 @@
 ;quick jump
 (require 'ace-jump-mode)
 
-; set up python IDE
-(require 'init_python)
-
-; set up javascript IDE
-(require 'init_javascript)
-
 ;auto complete
-(require 'auto-complete)
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict")
-(ac-config-default)
-(setq ac-auto-show-menu t)
-(setq ac-modes '(c-mode cc-mode c++-mode))
-(setq ac-use-fuzzy t)
+;; (require 'auto-complete)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict")
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+
+;; (setq ac-auto-show-menu t)
+;; (setq ac-modes '(c-mode cc-mode c++-mode))
+;; (setq ac-use-fuzzy t)
+(require 'init-auto-complete)
 
 ; enable clang-complete
 (require 'auto-complete-clang)
@@ -135,6 +132,16 @@
 ;(yas/initialize)
 ;(yas/load-directory ~/.emac.d/el-get/yasnippet/snippets/text-mode")
 ;(add-to-list 'ac-sources 'ac-source-yasnippet)
+
+; set up python IDE
+(require 'init-python)
+
+; set up javascript IDE
+(require 'init-javascript)
+
+;enalbe syntax check
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (message "done with initialziation")
 (when (require 'time-date nil t)

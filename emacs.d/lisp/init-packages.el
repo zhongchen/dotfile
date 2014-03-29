@@ -45,7 +45,7 @@
                  (global-set-key (kbd "C-x C-/") 'goto-last-change)))))
 
 (setq 
-  my_packages
+  my-packages
   '(el-get 
     color-theme
     solarized-theme
@@ -67,7 +67,7 @@
     yasnippet
     
     ; syntax checking
-    flymake
+    flycheck
     
     ; multiple windows
     window-numbering
@@ -97,11 +97,11 @@
     ace-jump-mode
     cl-lib))
 
-(setq my_packages
+(setq my-packages
   (append
-    my_packages
+    my-packages
     (mapcar 'el-get-source-name el-get-sources)))
 
-(el-get-cleanup my_packages)
-(el-get 'sync my_packages)
-(provide 'init_packages)
+(el-get-cleanup my-packages)
+(el-get 'sync my-packages)
+(provide 'init-packages)

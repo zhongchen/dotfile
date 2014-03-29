@@ -1,4 +1,6 @@
+;;; python IDE setup
 (require 'python-mode)
+
 ; use IPython
 (setq-default py-shell-name "ipython")
 (setq-default py-which-bufname "IPython")
@@ -31,4 +33,7 @@
 ;(require 'ropemacs)
 (pymacs-load "ropemacs" "rope-")
 
-(provide 'init_python)
+(add-hook 'python-mode-hook 'auto-complete-mode)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
+
+(provide 'init-python)

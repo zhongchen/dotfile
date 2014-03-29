@@ -1,6 +1,16 @@
 ;the file contains the envrionment setting
 (message "start the envionment setting")
 
+; enable tab complete
+(setq tab-always-indent 'complete)
+(add-to-list 'completion-styles 'initials t)
+
+; show the editing file name
+(setq frame-title-format '("Emacs @ " system-name ": %b %+%+ %f"))
+
+(setq make-backup-files nil) ; stop creating those backup~ files
+(setq auto-save-default nil) ; stop creating those #autosave# files
+
 ;; UTF-8 please
 (setq locale-coding-system 'utf-8) ; pretty
 (set-terminal-coding-system 'utf-8) ; pretty
@@ -41,8 +51,7 @@
 (setq windmove-wrap-around t)
 
 ;; M-x shell is a nice shell interface to use, let's make it colorful. If
-;; you need a terminal emulator rather than just a shell, consider M-x term
-;; instead.
+;; you need a terminal emulator rather than just a shell, consider M-x term instead.
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -79,4 +88,4 @@
 )
 
 (message "finish the environment setting")
-(provide 'init_environment_setting)
+(provide 'init-environment-setting)
