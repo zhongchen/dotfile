@@ -1,6 +1,7 @@
+;; auto-complete setup 
 (require 'auto-complete)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict")
 (require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict")
 (global-auto-complete-mode t)
 (setq-default ac-expand-on-auto-complete nil)
 (setq-default ac-auto-start nil)
@@ -37,7 +38,6 @@
 
 (add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
-
 (set-default 'ac-sources
              '(ac-source-imenu
                ac-source-dictionary
@@ -47,7 +47,7 @@
 
 (dolist (mode '(magit-log-edit-mode
                 log-edit-mode org-mode text-mode haml-mode
-                git-commit-mode
+                git-commit-mode c-mode cc-mode c++-mode
                 sass-mode yaml-mode csv-mode espresso-mode haskell-mode
                 html-mode nxml-mode sh-mode smarty-mode clojure-mode
                 lisp-mode textile-mode markdown-mode tuareg-mode
@@ -56,6 +56,43 @@
                 inferior-emacs-lisp-mode))
   (add-to-list 'ac-modes mode))
 
+(setq ac-use-fuzzy t)
+; enable clang-complete
+(require 'auto-complete-clang)
+
+(setq ac-auto-start nil)
+(setq ac-quick-help-delay 0.5)
+(ac-set-trigger-key "TAB")
+(define-key ac-mode-map  [(control tab)] 'auto-complete)
+(defun my-ac-config ()
+  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  (add-hook 'css-mode-hook 'ac-css-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (global-auto-complete-mode t))
+(defun my-ac-cc-mode-setup ()
+  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+;; ac-source-gtags
+(my-ac-config)
+
+;; This is the path to look for STL
+;; use following command to show the paths that gcc looks for stl
+;; echo "" | g++ -v -x c++ -E -V 
+(setq ac-clang-flags
+      (mapcar (lambda (item)(concat "-I" item))
+	      (split-string
+               "
+ /usr/include/c++/
+ /usr/include/x86_64-linux-gnu/c++/4.9.0
+ /usr/include/c++/backward
+ /usr/lib/gcc/x86_64-linux-gnu/4.9.0/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-linux-gnu/4.9.0/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include")))
 
 ;; Exclude very large buffers from dabbrev
 (defun sanityinc/dabbrev-friend-buffer (other-buffer)

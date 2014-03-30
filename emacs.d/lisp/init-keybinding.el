@@ -21,5 +21,9 @@
 (evil-leader/set-key "b" 'switch-to-buffer)
 (evil-leader/set-key "k" 'kill-buffer)
 
+;enable iedit
+(global-set-key (kbd "C-c ;") 'iedit-mode)
+(evil-leader/set-key "i" 'iedit-mode)
+
 (message "successfully finish keybinding process")
 (provide 'init-keybinding)

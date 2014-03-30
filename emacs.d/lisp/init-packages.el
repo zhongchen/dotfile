@@ -25,7 +25,7 @@
 (setq el-get-git-shallow-clone t)
 
 ;my own recipes, which will override the default ones
-(add-to-list 'el-get-recipe-path "~/.emacs.d/local_recipe")
+(add-to-list 'el-get-recipe-path "~/.emacs.d/local-recipe")
 
 ;; set local recipes
 (setq
@@ -51,6 +51,7 @@
     solarized-theme
     nodejs-repl
     ctags
+    xcscope
    
     ; vim
     evil
@@ -93,6 +94,12 @@
     smart-forward
     powerline
     ;jade-mode
+
+    ;smart indention and auto-completion
+    smart-tab
+
+    ; multi-occurence editing
+    iedit
 
     ace-jump-mode
     cl-lib))
