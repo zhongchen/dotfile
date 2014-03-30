@@ -1,6 +1,10 @@
 ;;; record time
 (setq emacs-load-start-time (current-time))
 
+(setq max-specpdl-size 10000)  ; default is 1000, reduce the backtrace level
+(setq debug-on-error t)    ; now you should get a backtrace
+(setq max-lisp-eval-depth 10000)
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 
@@ -19,9 +23,6 @@
 (setq *emacs24* (and (not *xemacs*) (or (>= emacs-major-version 24))) )
 
 
-(require 'init-packages)
-(require 'init-environment-setting)
-(require 'init-keybinding)
 (require 'ffap)
 (require 'uniquify)
 (require 'ansi-color)
@@ -30,6 +31,9 @@
 (require 'dired-x)
 (require 'compile)
 (require 'cl-lib)
+(require 'init-packages)
+(require 'init-environment-setting)
+(require 'init-keybinding)
 
 ;; use ido for minibuffer completion
 (require 'ido)
@@ -92,11 +96,11 @@
 (cscope-setup)
 
 ;;yasnippet initialization
-(require 'yasnippet)
-(yas-global-mode 1)
+;(require 'yasnippet)
+;(yas-global-mode 1)
 ;(yas/initialize)
 ;(yas/load-directory "~/.emac.d/el-get/yasnippet/snippets/text-mode")
-(add-to-list 'ac-sources 'ac-source-yasnippet)
+;(add-to-list 'ac-sources 'ac-source-yasnippet)
 
 ; set up python IDE
 (require 'init-python)

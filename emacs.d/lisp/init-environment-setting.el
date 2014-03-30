@@ -32,8 +32,8 @@
 (line-number-mode 1)                        ; have line numbers and
 (column-number-mode 1)                      ; column numbers in the mode line
 
-(tool-bar-mode -1)                          ; no tool bar with icons
-(scroll-bar-mode -1)                        ; no scroll bars
+;(tool-bar-mode -1)                          ; no tool bar with icons
+;(scroll-bar-mode -1)                        ; no scroll bars
 
 (global-linum-mode 1)                        ; add line numbers on the left
 

@@ -101,8 +101,7 @@
     ; multi-occurence editing
     iedit
 
-    ace-jump-mode
-    cl-lib))
+    ace-jump-mode))
 
 (setq my-packages
   (append
