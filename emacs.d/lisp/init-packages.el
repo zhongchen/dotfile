@@ -75,6 +75,8 @@
 
     undo-tree
 
+    cl-lib
+
     ;python IDE 
     python-mode
     ropemacs

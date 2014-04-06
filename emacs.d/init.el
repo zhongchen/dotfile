@@ -1,9 +1,7 @@
 ;;; record time
 (setq emacs-load-start-time (current-time))
 
-(setq max-specpdl-size 10000)  ; default is 1000, reduce the backtrace level
 (setq debug-on-error t)    ; now you should get a backtrace
-(setq max-lisp-eval-depth 10000)
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
@@ -30,10 +28,10 @@
 (require 'linum)
 (require 'dired-x)
 (require 'compile)
-(require 'cl-lib)
 (require 'init-packages)
 (require 'init-environment-setting)
 (require 'init-keybinding)
+(require 'cl-lib)
 
 ;; use ido for minibuffer completion
 (require 'ido)
@@ -87,7 +85,8 @@
 (winner-mode 1)
 
 ;quick jump
-(require 'ace-jump-mode)
+(autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
+(autoload 'ace-jump-mode-pop-mark "ace-jump-mode" "Ace jump back :)" t)
 
 ; auto-complete setup
 (require 'init-auto-complete)
