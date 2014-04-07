@@ -33,26 +33,15 @@
 (require 'init-keybinding)
 (require 'cl-lib)
 
-;; use ido for minibuffer completion
-(require 'ido)
-(ido-mode t)
-(setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
-(setq ido-enable-flex-matching t)
-(setq ido-use-filename-at-point 'guess)
-(setq ido-show-dot-for-dired t)
+; enable color theme
+(require 'color-theme-mac-classic)
+(color-theme-mac-classic)
+o
+; initialize ido-mode
+(require 'init-ido)
 
-; enable evil-leader before evil
-(require 'evil-leader)
-(global-evil-leader-mode 1)
-(evil-leader/set-leader ",")
-
-;enable evil
-(require 'evil)
-(evil-mode 1)
-
-;evil match it
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
+; initialize evil-mode
+(require 'init-evil)
 
 (require 'ctags)
 (global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
@@ -61,10 +50,6 @@
 
 ; multi-occurence edit
 (require 'iedit)
-
-; enable color theme
-(require 'color-theme-mac-classic)
-(color-theme-mac-classic)
 
 ; load some random els.
 (add-to-list 'load-path "~/.emacs.d/packages/")
