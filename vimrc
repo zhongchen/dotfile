@@ -114,4 +114,12 @@ function! HasPaste()
     return ''
 endfunction
 
+" vimdiff keybinding
+" get from local
+nmap <silent> <leader>dl :diffget LO<cr>
+" get from base
+nmap <silent> <leader>db :diffget BA<cr>
+" get from remote
+nmap <silent> <leader>dr :diffget RE<cr>
+
 set clipboard=unnamedplus
