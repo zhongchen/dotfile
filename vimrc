@@ -1,13 +1,15 @@
-"not compatible with vi, improve performance
-set nocompatible               
-
-"force reloading after pathogen loaded
+set nocompatible              "not compatible with vi, improve performance
 filetype off
 
-"enalbe pathogen
-"execute pathogen#infect()
-"call pathogen#incubate() 
-"call pathogen#helptags()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/dotfile/vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/vundle'
+
+Plugin 'Lokaltog/vim-easymotion'
+
 "Customize vimrc
 "Enable plugin and indenting plugins
 filetype plugin indent on
@@ -70,9 +72,11 @@ set cmdheight=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-"background color
 set background=dark
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+colorscheme solarized
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -122,4 +126,4 @@ nmap <silent> <leader>db :diffget BA<cr>
 " get from remote
 nmap <silent> <leader>dr :diffget RE<cr>
 
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
