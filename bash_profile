@@ -64,3 +64,5 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 
 #export PATH=/usr/local/heroku/bin:$PATH # Heroku: https://toolbelt.heroku.com/standalone
+
+export CPLUS_INCLUDE_PATH=/usr/include/c++/:/usr/include/x86_64-linux-gnu/c++/4.9.0:/usr/include/c++/backward:/usr/lib/gcc/x86_64-linux-gnu/4.9.0/include:/usr/local/include:/usr/lib/gcc/x86_64-linux-gnu/4.9.0/include-fixed:/usr/include/c++/x86_64-linux-gnu/

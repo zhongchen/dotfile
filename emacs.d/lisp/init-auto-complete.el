@@ -80,18 +80,18 @@
 
 ;; This is the path to look for STL
 ;; use following command to show the paths that gcc looks for stl
-;; echo "" | g++ -v -x c++ -E -V 
+;; g++ -E -x c++ - -v < /dev/null 
 (setq ac-clang-flags
       (mapcar (lambda (item)(concat "-I" item))
 	      (split-string
                "
  /usr/include/c++/
- /usr/include/x86_64-linux-gnu/c++/4.9.0
  /usr/include/c++/backward
  /usr/lib/gcc/x86_64-linux-gnu/4.9.0/include
- /usr/local/include
  /usr/lib/gcc/x86_64-linux-gnu/4.9.0/include-fixed
+ /usr/local/include
  /usr/include/x86_64-linux-gnu
+ /usr/include/c++/x86_64-linux-gnu
  /usr/include")))
 
 ;; Exclude very large buffers from dabbrev

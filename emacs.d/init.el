@@ -20,7 +20,6 @@
 (setq *emacs23* (and (not *xemacs*) (or (>= emacs-major-version 23))) )
 (setq *emacs24* (and (not *xemacs*) (or (>= emacs-major-version 24))) )
 
-
 (require 'ffap)
 (require 'uniquify)
 (require 'ansi-color)
@@ -36,7 +35,7 @@
 ; enable color theme
 (require 'color-theme-mac-classic)
 (color-theme-mac-classic)
-o
+
 ; initialize ido-mode
 (require 'init-ido)
 
