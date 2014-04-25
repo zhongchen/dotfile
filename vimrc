@@ -6,11 +6,42 @@ set rtp+=~/dotfile/vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle, required
+" general
 Plugin 'gmarik/vundle'
-
 Plugin 'Lokaltog/vim-easymotion'
+Bundle 'kien/ctrlp.vim'
+Bundle 'bitc/vim-bad-whitespace'
+Bundle 'ciaranm/detectindent'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'troydm/easybuffer.vim'
+Bundle 'jnurmine/Zenburn'
+"Bundle 'mileszs/ack.vim'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'mattn/emmet-vim'
+Bundle 'Gundo'
+" lang specific
+"Bundle "pangloss/vim-javascript"
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'guns/vim-clojure-static'
+"Bundle 'marijnh/tern_for_vim'
+"Bundle 'wting/rust.vim'
+"Bundle 'tpope/vim-liquid'
+"Bundle 'tpope/vim-markdown'
+"Bundle 'psykidellic/vim-jekyll'
+"Bundle 'digitaltoad/vim-jade'
 
-"Customize vimrc
+nnoremap <F3> :GundoToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
+
+nnoremap <F4> :NERDTreeToggle<CR>
+let g:tagbar_autofocus = 1
+let NERDTreeIgnore = ['\.pyc$', '\~$', '\.o$', '\.class$', '\.out$', '\.o$']
+" close vim if the Nerdtree is the only window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 "Enable plugin and indenting plugins
 filetype plugin indent on
 
@@ -18,8 +49,10 @@ filetype plugin indent on
 let mapleader = ","
 let g:mapleader = ","
 
-"Sets how many lines of history vim has to remember
+nmap <leader>b :EasyBufferToggle<CR>
+
 set history=666
+set undolevels=1000
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -27,8 +60,10 @@ set autoread
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 
-" Fast saving
+ "Fast saving
 nmap <leader>w :w!<cr>
+
+map <leader>/ <plug>NERDCommenterToggle
 
 "Always show current position
 set ruler
@@ -49,20 +84,39 @@ set nu
 set encoding=utf-8
 set fileencoding=utf-8
 
-"shift width
-set shiftwidth=2
+"set expandtab
+set shiftwidth=4
+"set softtabstop=4
+set smarttab
 
-"Highlight search results
+set cc=120
+set title
+
 set hlsearch
-
-"Makes search act like search in modern browsers
+set ignorecase
+set smartcase
+set infercase
+set showmatch
 set incsearch
+set nowrap
 
 "No .swap files and backup
-"use git
 set nobackup
 set noswapfile
 set nowb
+
+" Detect Indent
+let g:detectindent_preferred_expandtab = 1
+let g:detectindent_preferred_indent = 4
+autocmd BufNewFile,BufReadPost * :DetectIndent
+autocmd FileType make setlocal noexpandtab
+
+" Strip trailing ws
+if !exists("*StripWS")
+  function StripWS()
+      :%s/\s\+$//e
+  endfunction
+endif
 
 "Height of the command bar
 set cmdheight=2

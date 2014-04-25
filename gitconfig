@@ -12,6 +12,7 @@
 [alias]
 	d = difftool
         m = mergetool
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3

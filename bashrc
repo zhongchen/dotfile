@@ -188,11 +188,9 @@ alias ga="git add"
 alias gaa="git add ."
 alias gau="git add -u"
 alias gc="git commit -m"
-alias gca="git commit -am"
-alias gb="git branch"
 alias gbd="git branch -d"
-alias gco="git checkout"
-alias gcob="git checkout -b"
+alias gch="git checkout"
+alias gchb="git checkout -b"
 alias gt="git stash"
 alias gta="git stash apply"
 alias gm="git merge"
@@ -201,7 +199,6 @@ alias gl="git log --oneline --decorate --graph"
 alias gs="git show"
 alias gd="git d"
 alias gdc="git d --cached"
-alias gbl="git blame"
 alias gps="git push"
 alias gpl="git pull"
 
@@ -225,6 +222,6 @@ echo -ne '\e]4;15;#fdf6e3\a'  # bold white
 
 echo -ne '\e]10;#eee8d5\a'  # foreground
 echo -ne '\e]11;#002b36\a'  # background
-echo -ne '\e]12;#859900\a'  # cursor
+# echo -ne '\e]12;#859900\a'  # cursor
 Term=xterm-256color
 
