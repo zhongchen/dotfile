@@ -84,9 +84,10 @@ set nu
 set encoding=utf-8
 set fileencoding=utf-8
 
-"set expandtab
+set tabstop=4
+set expandtab
 set shiftwidth=4
-"set softtabstop=4
+set softtabstop=4
 set smarttab
 
 set cc=120
