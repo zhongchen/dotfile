@@ -18,6 +18,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'troydm/easybuffer.vim'
 Bundle 'jnurmine/Zenburn'
+Bundle 'Rip-Rip/clang_complete'
 "Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mattn/emmet-vim'
@@ -84,26 +85,39 @@ set nu
 set encoding=utf-8
 set fileencoding=utf-8
 
-"set expandtab
 set shiftwidth=4
-"set softtabstop=4
+set tabstop=4
+set softtabstop=4 "number of spaces in tab
+set expandtab "tabs are spaces
 set smarttab
+
+set showcmd "show command in bottom bar
+
+set wildmenu "ctrl+n and ctrl+p to go back and fro
+
+set lazyredraw "redraw only when need to
 
 set cc=120
 set title
 
-set hlsearch
+set hlsearch "highlight matches
+nnoremap <leader><space> :nohlsearch<CR>
 set ignorecase
 set smartcase
 set infercase
-set showmatch
-set incsearch
+set showmatch "highlight matching [{()}]
+set incsearch "search as characters are entered
 set nowrap
 
 "No .swap files and backup
 set nobackup
 set noswapfile
 set nowb
+
+set foldenable "enalbe folding
+"set foldlevelstart=10 "enable it when necessary
+
+nnoremap <space> za "space open/closes folds
 
 " Detect Indent
 let g:detectindent_preferred_expandtab = 1
@@ -131,10 +145,6 @@ set background=dark
 "let g:solarized_termtrans=1
 colorscheme solarized
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
@@ -145,7 +155,6 @@ set mouse=a
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
-"temp setup
 "Disable some keys
 map <up> <nop>
 map <down> <nop>
