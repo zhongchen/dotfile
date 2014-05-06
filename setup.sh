@@ -1,5 +1,3 @@
-
-
 #This file is used to set up the environment
 
 
