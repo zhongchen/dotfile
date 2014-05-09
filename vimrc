@@ -2,11 +2,23 @@ set nocompatible              "not compatible with vi, improve performance
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/dotfile/vim/bundle/vundle/
-call vundle#rc()
+if has('win32')
+    set rtp+=~/vimfiles/bundle/vundle/
+    let path='~/vimfiles/bundle'
+    call vundle#rc(path)
+else
+    set rtp+=~/dotfile/vim/bundle/vundle/
+    call vundle#rc()
+endif
+
+Plugin 'gmarik/vundle'
+
+if has('unix')
+    Bundle 'Rip-Rip/clang_complete'
+    Bundle 'taglist.vim'
+endif
 
 " general plugin
-Plugin 'gmarik/vundle'
 Plugin 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bitc/vim-bad-whitespace'
@@ -17,8 +29,6 @@ Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'troydm/easybuffer.vim'
 Bundle 'jnurmine/Zenburn'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'taglist.vim'
 "Bundle 'mileszs/ack.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mattn/emmet-vim'
@@ -33,6 +43,8 @@ Bundle 'Gundo'
 "Bundle 'tpope/vim-markdown'
 "Bundle 'psykidellic/vim-jekyll'
 "Bundle 'digitaltoad/vim-jade'
+
+
 
 nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :GundoToggle<CR>
