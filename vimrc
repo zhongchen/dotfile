@@ -128,7 +128,7 @@ set smartcase
 set infercase
 set showmatch "highlight matching [{()}]
 set incsearch "search as characters are entered
-set nowrap
+set wrap
 
 set smartindent
 
@@ -195,11 +195,11 @@ nnoremap <leader>pp :setlocal paste!<cr>
 
 " vimdiff keybinding
 " get from local
-nmap <silent> <leader>dl :diffget LO<cr>
+nmap <silent> <leader>gl :diffget LO<cr>
 " get from base
-nmap <silent> <leader>db :diffget BA<cr>
+nmap <silent> <leader>gb :diffget BA<cr>
 " get from remote
-nmap <silent> <leader>dr :diffget RE<cr>
+nmap <silent> <leader>gr :diffget RE<cr>
 
 "  allow the backspace key to erase previously entered characters, autoindent, and new lines
 set backspace=indent,eol,start
@@ -237,3 +237,61 @@ if has('clipboard')
         set clipboard=unnamed
     endif
 endif
+
+if has("cscope")
+    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    set cscopetag
+
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    set csto=0
+
+    " add any cscope database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add the database pointed to by environment variable
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
+    " show msg when any other cscope db added
+    set cscopeverbose
+
+    " The following maps all invoke one of the following cscope search types:
+    "
+    "   's'   symbol: find all references to the token under cursor
+    "   'g'   global: find global definition(s) of the token under cursor
+    "   'c'   calls:  find all calls to the function name under cursor
+    "   't'   text:   find all instances of the text under cursor
+    "   'e'   egrep:  egrep search for the word under cursor
+    "   'f'   file:   open the filename under cursor
+    "   'i'   includes: find files that include the filename under cursor
+    "   'd'   called: find functions that function under cursor calls
+    "
+    " (Note: you may wish to put a 'set splitright' in your .vimrc
+    " if you prefer the new window on the right instead of the left
+
+    nmap <C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+    "set notimeout
+    " Or, you can keep timeouts, by uncommenting the timeoutlen line below,
+    " with your own personal favorite value (in milliseconds):
+    "
+    "set timeoutlen=4000
+    "set ttimeout
+    "
+    " Either way, since mapping timeout settings by default also set the
+    " timeouts for multicharacter 'keys codes' (like <F1>), you should also
+    " set ttimeout and ttimeoutlen: otherwise, you will experience strange
+    " delays as vim waits for a keystroke after you hit ESC (it will be
+    " waiting to see if the ESC is actually part of a key code like <F1>).
+endif
+
+nnoremap <leader>s :set spell!<CR>
