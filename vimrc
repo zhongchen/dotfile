@@ -295,3 +295,9 @@ if has("cscope")
 endif
 
 nnoremap <leader>s :set spell!<CR>
+
+if has('unix')
+  " enable english dictionary
+  set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+  inoremap <C-f> <C-x><C-k>
+endif
