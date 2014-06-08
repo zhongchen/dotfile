@@ -3,12 +3,12 @@ filetype off
 
 " set the runtime path to include Vundle and initialize
 if has('win32')
-    set rtp+=~/vimfiles/bundle/vundle/
+    set rtp+=~/vimfiles/bundle/Vundle.vim/
     let path='~/vimfiles/bundle'
-    call vundle#rc(path)
+    call vundle#begin(path)
 else
-    set rtp+=~/dotfile/vim/bundle/vundle/
-    call vundle#rc()
+    set rtp+=~/dotfile/vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
 
 Plugin 'gmarik/vundle'
