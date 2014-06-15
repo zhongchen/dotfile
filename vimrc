@@ -148,7 +148,7 @@ set foldmethod=indent   " fold based on indent level
 " Detect Indent
 let g:detectindent_preferred_expandtab = 1
 let g:detectindent_preferred_indent = 4
-autocmd BufNewFile,BufReadPost * :DetectIndent
+"autocmd BufNewFile,BufReadPost * :DetectIndent
 autocmd FileType make setlocal noexpandtab
 
 "Height of the command bar
