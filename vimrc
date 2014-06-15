@@ -16,6 +16,8 @@ Plugin 'gmarik/vundle'
 if has('unix')
     Bundle 'Rip-Rip/clang_complete'
     Bundle 'taglist.vim'
+    Bundle 'moll/vim-node'
+    Bundle 'wookiehangover/jshint.vim'
 endif
 
 " general plugin
@@ -43,8 +45,6 @@ Bundle 'Gundo'
 "Bundle 'tpope/vim-markdown'
 "Bundle 'psykidellic/vim-jekyll'
 "Bundle 'digitaltoad/vim-jade'
-
-
 
 nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :GundoToggle<CR>
