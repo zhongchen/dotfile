@@ -2,7 +2,7 @@ set nocompatible              "not compatible with vi, improve performance
 filetype off
 
 " set the runtime path to include Vundle and initialize
-if has('win32')
+if has('win32') || has("win64")
     set rtp+=~/vimfiles/bundle/Vundle.vim/
     let path='~/vimfiles/bundle'
     call vundle#begin(path)
@@ -49,7 +49,6 @@ Bundle 'Gundo'
 nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :GundoToggle<CR>
 nnoremap <F4> :NERDTreeToggle<CR>
-nnoremap <F8> :TagbarToggle<CR>
 
 let g:tagbar_usearrows = 1
 
