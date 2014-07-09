@@ -11,6 +11,10 @@ else
     call vundle#begin()
 endif
 
+if has("gui_running")
+    autocmd GUIEnter * set vb t_vb=
+endif
+
 Plugin 'gmarik/vundle'
 
 if has('unix')
