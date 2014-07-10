@@ -15,6 +15,7 @@ if has("gui_running")
     autocmd GUIEnter * set vb t_vb=
 endif
 
+" Vundle manages vundle
 Plugin 'gmarik/vundle'
 
 if has('unix')
@@ -39,8 +40,14 @@ Bundle 'jnurmine/Zenburn'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mattn/emmet-vim'
 Bundle 'Gundo'
+Bundle 'spf13/vim-autoclose'
+Bundle 'tpope/vim-surround'
 " lang specific
-"Bundle "pangloss/vim-javascript"
+Bundle "pangloss/vim-javascript"
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'wavded/vim-stylus'
+Bundle 'kchmck/vim-coffee-script'
 "Bundle 'Valloric/YouCompleteMe'
 "Bundle 'guns/vim-clojure-static'
 "Bundle 'marijnh/tern_for_vim'
@@ -48,11 +55,20 @@ Bundle 'Gundo'
 "Bundle 'tpope/vim-liquid'
 "Bundle 'tpope/vim-markdown'
 "Bundle 'psykidellic/vim-jekyll'
-"Bundle 'digitaltoad/vim-jade'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()
+filetype plugin indent on
+
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :GundoToggle<CR>
 nnoremap <F4> :NERDTreeToggle<CR>
+
+" In vim, don't do auto close.
+let g:autoclose_vim_commentmode = 1
 
 let g:tagbar_usearrows = 1
 
@@ -224,7 +240,7 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+" Delete trailing white space on save, useful for Python and CoffeeScript 
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -297,7 +313,7 @@ if has("cscope")
     " waiting to see if the ESC is actually part of a key code like <F1>).
 endif
 
-nnoremap <leader>s :set spell!<CR>
+nnoremap <leader>sp :set spell!<CR>
 
 if has('unix')
   " enable english dictionary
