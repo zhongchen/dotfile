@@ -11,3 +11,6 @@ ln -sf ~/dotfile/vimrc ~/.vimrc
 
 #set up the folder of vim
 ln -sf ~/dotfie/vim ~/.vim
+
+# solve vim clipboard problem in ubuntu
+# sudo aptitude install vim-gnome

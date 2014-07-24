@@ -1,8 +1,24 @@
 set nocompatible              "not compatible with vi, improve performance
 filetype off
 
+silent function! OSX()
+    return has('macunix')
+endfunction
+
+silent function! LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+endfunction
+
+silent function! WINDOWS()
+    return (has('win32') || has('win64'))
+endfunction
+
+if !WINDOWS()
+    set shell=/bin/sh
+endif
+
 " set the runtime path to include Vundle and initialize
-if has('win32') || has("win64")
+if WINDOWS()
     set rtp+=~/vimfiles/bundle/Vundle.vim/
     let path='~/vimfiles/bundle'
     call vundle#begin(path)
@@ -26,6 +42,9 @@ if has('unix')
 endif
 
 " general plugin
+Plugin 'vim-scripts/SearchComplete'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/ShowMarks'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bitc/vim-bad-whitespace'
@@ -56,10 +75,17 @@ Plugin 'kchmck/vim-coffee-script'
 "Plugin 'tpope/vim-markdown'
 "Plugin 'psykidellic/vim-jekyll'
 
+"Plugins related to vim-snipmate
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
 
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
+" Enable syntax highlighting
+syntax enable
 
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
@@ -106,8 +132,19 @@ nmap <leader>w :w!<cr>
 
 map <leader>/ <plug>NERDCommenterToggle
 
-"Always show current position
-set ruler
+set ruler  "Always show current position
+set showcmd "show command in bottom bar
+
+if has('statusline')
+    set laststatus=2
+" Broken down into easily includeable segments
+    set statusline=%<%f\ " Filename
+    set statusline+=%w%h%m%r " Options
+    "set statusline+=%{fugitive#statusline()} " Git Hotness
+    set statusline+=\ [%{&ff}/%Y] " Filetype
+    set statusline+=\ [%{getcwd()}] " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+endif
 
 " No annoying sound on errors
 set noerrorbells
@@ -125,15 +162,20 @@ set nu
 set encoding=utf-8
 set fileencoding=utf-8
 
+" Formatting
+set autoindent  " Indent at the same level of the previous line
+set smartindent
 set expandtab "tabs are spaces
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4 "number of spaces in tab
 set smarttab
+set splitright "put new windows to the right of the current window
+set splitbelow "put new windows to the bottom of the current window
 
-set showcmd "show command in bottom bar
-
+" show list instead of just completing
 set wildmenu "ctrl+n and ctrl+p to go back and fro
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 set lazyredraw "redraw only when need to
 
@@ -149,7 +191,6 @@ set showmatch "highlight matching [{()}]
 set incsearch "search as characters are entered
 set wrap
 
-set smartindent
 
 set winaltkeys=no
 
@@ -176,11 +217,11 @@ set cmdheight=2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable
 set background=dark
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans=1
+"let g:solarized_contrast="normal"
+"let g:solarized_visibility="normal"
 colorscheme solarized
 set t_Co=256
 
@@ -189,6 +230,8 @@ map j gj
 map k gk
 
 set mouse=a  "enable mouse
+set mousehide " Hide the mouse cursor while typing
+scriptencoding utf-8
 
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -199,25 +242,28 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+
+map <C-j> <C-w>j
+map <C-h> <C-w>h
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
 "My personal mapping
 inoremap <c-d> <esc>ddi
 inoremap <c-l> <del>
 
 set winaltkeys=no
-nnoremap <m-h> <c-w>h
-nnoremap <m-j> <c-w>j
-nnoremap <m-k> <c-w>k
-nnoremap <m-l> <c-w>l
+
 
 "Toggle paste mode on and off
 nnoremap <leader>pp :setlocal paste!<cr>
 
 " vimdiff keybinding
-" get from local
+" get from local  (from the merging branch)
 nmap <silent> <leader>gl :diffget LO<cr>
-" get from base
+" get from base (from the common ancestor)
 nmap <silent> <leader>gb :diffget BA<cr>
-" get from remote
+" get from remote (from the current branch)
 nmap <silent> <leader>gr :diffget RE<cr>
 
 "  allow the backspace key to erase previously entered characters, autoindent, and new lines
@@ -229,8 +275,6 @@ set hidden "allow buffer switching without saving
 
 set foldcolumn=1
 
-set ai "Auto indent
-set si "Smart indent
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -312,6 +356,12 @@ if has("cscope")
     " delays as vim waits for a keystroke after you hit ESC (it will be
     " waiting to see if the ESC is actually part of a key code like <F1>).
 endif
+
+" Mappings for ShowMarks
+"\mt : Toggles ShowMarks on and off.
+"\mh : Hides an individual mark.
+"\ma : Hides all marks in the current buffer.
+"\mm : Places the next available mark.
 
 nnoremap <leader>sp :set spell!<CR>
 
