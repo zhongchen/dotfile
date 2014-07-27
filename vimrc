@@ -46,6 +46,7 @@ Plugin 'vim-scripts/SearchComplete'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/ShowMarks'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'ciaranm/detectindent'
@@ -125,8 +126,6 @@ let g:ctrlp_working_path_mode = ''
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc,*.class
 
 nmap <leader>w :w!<cr>
 
@@ -175,7 +174,23 @@ set splitbelow "put new windows to the bottom of the current window
 
 " show list instead of just completing
 set wildmenu "ctrl+n and ctrl+p to go back and fro
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set wildmode=list:longest,full
+
+" Ignore compiled files
+set wildignore+=*.class
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word
+lists
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.orig                           " Merge resolution files
+
+" Highlight problematic whitespace
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+
 
 set lazyredraw "redraw only when need to
 
@@ -199,11 +214,13 @@ set nobackup
 set noswapfile
 set nowb
 
+" folding related.
 set foldenable "enalbe folding
 set foldlevelstart=10 "enable it when necessary
 set foldnestmax=10 "10 nested fold max
 nnoremap <space> za "space open/closes folds
-set foldmethod=indent   " fold based on indent level
+vnoremap <space> za
+set foldmethod=expr   " fold based on indent level
 
 " Detect Indent
 let g:detectindent_preferred_expandtab = 1
@@ -242,18 +259,15 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
-
 map <C-j> <C-w>j
 map <C-h> <C-w>h
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 "My personal mapping
-inoremap <c-d> <esc>ddi
-inoremap <c-l> <del>
+inoremap <c-d> <del>
 
-set winaltkeys=no
-
+set winaltkeys=no 
 
 "Toggle paste mode on and off
 nnoremap <leader>pp :setlocal paste!<cr>
@@ -284,7 +298,7 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Delete trailing white space on save, useful for Python and CoffeeScript 
+" Delete trailing white space on save, useful for Python and CoffeeScript
 func! DeleteTrailingWS()
   exe "normal mz"
   %s/\s\+$//ge
@@ -358,12 +372,28 @@ if has("cscope")
 endif
 
 " Mappings for ShowMarks
-"\mt : Toggles ShowMarks on and off.
-"\mh : Hides an individual mark.
-"\ma : Hides all marks in the current buffer.
-"\mm : Places the next available mark.
+"<leader>mt : Toggles ShowMarks on and off.
+"<leader>mh : Hides an individual mark.
+"<leader>ma : Hides all marks in the current buffer.
+"<leader>mm : Places the next available mark.
 
 nnoremap <leader>sp :set spell!<CR>
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Allow using the repeat operator with a visual selection (!)
+" http://stackoverflow.com/a/8064607/127816
+vnoremap . :normal .<CR>
+
+" For when you forget to sudo.. Really Write the file.
+cmap w!! w !sudo tee % >/dev/null
+
+" mpping for fast opening files.
+map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>es :vsp <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 if has('unix')
   " enable english dictionary
