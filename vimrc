@@ -1,4 +1,5 @@
-set nocompatible              "not compatible with vi, improve performance
+"not compatible with vi, improve performance
+set nocompatible
 filetype off
 
 silent function! OSX()
@@ -13,8 +14,31 @@ silent function! WINDOWS()
     return (has('win32') || has('win64'))
 endfunction
 
+" Windows Compatible {
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization across (heterogeneous) systems easier.
+if WINDOWS()
+  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME
+  " Be nice and check for multi_byte even if the config requires
+  " multi_byte support most of the time
+  if has("multi_byte")
+    " Windows cmd.exe still uses cp850. If Windows ever moved to
+    " Powershell as the primary terminal, this would be utf-8
+    set termencoding=cp850
+    " Let Vim use utf-8 internally, because many scripts require this
+    set encoding=utf-8
+    setglobal fileencoding=utf-8
+    " Windows has traditionally used cp1252, so it's probably wise to
+    " fallback into cp1252 instead of eg. iso-8859-15.
+    " Newer Windows files might contain utf-8 or utf-16 LE so we might
+    " want to try them first.
+    set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+  endif
+endif
+" }
+
 if !WINDOWS()
-    set shell=/bin/sh
+    let $BASH_ENV="~/.bash_profile"
+    set shell=/bin/bash
 endif
 
 " set the runtime path to include Vundle and initialize
@@ -27,48 +51,83 @@ else
     call vundle#begin()
 endif
 
-if has("gui_running")
-    autocmd GUIEnter * set vb t_vb=
-endif
+let g:bundle_groups=['general','writing', 'neocomplete', 'programming', 'python', 'javascript', 'misc',]
 
 " Vundle manages vundle
 Plugin 'gmarik/vundle'
-
-if has('unix')
-    Plugin 'Rip-Rip/clang_complete'
-    Plugin 'taglist.vim'
-    Plugin 'moll/vim-node'
-    Plugin 'wookiehangover/jshint.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils' "utility library
+Plugin 'tomtom/tlib_vim' "utility library
+if executable('ag')
+    Plugin 'mileszs/ack.vim'
+    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+elseif executable('ack-grep')
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+    Plugin 'mileszs/ack.vim'
+elseif executable('ack')
+    Plugin 'mileszs/ack.vim'
 endif
 
-" general plugin
-Plugin 'vim-scripts/SearchComplete'
+" general plugin {
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'troydm/easybuffer.vim' "quickly switch between buffers.
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'spf13/vim-autoclose'
+Plugin 'tpope/vim-surround' "change surrounding.
+Plugin 'tpope/vim-repeat'
+Plugin 'mbbill/undotree'
+if has('python') || has('python3')
+    Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+endif
+"}
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/ShowMarks'
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'kien/ctrlp.vim'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'ciaranm/detectindent'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
-Plugin 'troydm/easybuffer.vim'
+if executable('ctags')
+    Plugin 'majutsushi/tagbar'
+endif
 Plugin 'jnurmine/Zenburn'
-"Plugin 'mileszs/ack.vim'
-Plugin 'Lokaltog/vim-powerline'
+
+" Snippets & autocomplete {
+if count(g:bundle_groups, 'neocomplete')
+    Plugin 'Shougo/neocomplete.vim.git'
+    Plugin 'Shougo/neosnippet'
+    Plugin 'Shougo/neosnippet-snippets'
+    Plugin 'honza/vim-snippets'
+endif
+let g:neocomplete#enable_at_startup = 1
+" }
+
 Plugin 'mattn/emmet-vim'
-Plugin 'Gundo'
-Plugin 'spf13/vim-autoclose'
-Plugin 'tpope/vim-surround'
+
 " lang specific
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'digitaltoad/vim-jade'
+" Javascript {
+if count(g:bundle_groups, 'javascript')
+    Plugin 'elzr/vim-json'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'jelera/vim-javascript-syntax'
+    Plugin 'digitaltoad/vim-jade'
+    Plugin 'moll/vim-node'
+    Plugin 'kchmck/vim-coffee-script'
+    Plugin 'wookiehangover/jshint.vim'
+endif
+"}
+
+" Python {
+if count(g:bundle_groups, 'python')
+    Plugin 'klen/python-mode'
+    Plugin 'python.vim'
+    Plugin 'python_match.vim'
+    Plugin 'pythoncomplete'
+endif
+" }
+
 Plugin 'wavded/vim-stylus'
-Plugin 'kchmck/vim-coffee-script'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'taglist.vim'
 "Plugin 'guns/vim-clojure-static'
 "Plugin 'marijnh/tern_for_vim'
 "Plugin 'wting/rust.vim'
@@ -76,11 +135,6 @@ Plugin 'kchmck/vim-coffee-script'
 "Plugin 'tpope/vim-markdown'
 "Plugin 'psykidellic/vim-jekyll'
 
-"Plugins related to vim-snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -91,7 +145,11 @@ syntax enable
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 nnoremap <F2> :TagbarToggle<CR>
-nnoremap <F3> :GundoToggle<CR>
+nnoremap <F3> :UndotreeToggle<CR>
+if has("persistent_undo")
+    set undodir='~/.undodir/'
+    set undofile
+endif
 nnoremap <F4> :NERDTreeToggle<CR>
 
 " In vim, don't do auto close.
@@ -182,8 +240,7 @@ set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-set wildignore+=*.spl                            " compiled spelling word
-lists
+set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.DS_Store                       " OSX bullshit
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
@@ -235,10 +292,10 @@ set cmdheight=2
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set background=dark
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=1
-"let g:solarized_contrast="normal"
-"let g:solarized_visibility="normal"
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
 colorscheme solarized
 set t_Co=256
 
@@ -389,6 +446,10 @@ vnoremap . :normal .<CR>
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
+
+" Select (charwise) the contents of the current line, excluding indentation.
+" " Great for pasting Python lines into REPLs.
+nnoremap vv ^vg_
 
 " mpping for fast opening files.
 map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
