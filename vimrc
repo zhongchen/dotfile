@@ -51,7 +51,7 @@ else
     call vundle#begin()
 endif
 
-let g:bundle_groups=['general','writing', 'neocomplete', 'programming', 'python', 'javascript', 'misc',]
+let g:bundle_groups=['general','neocomplete', 'programming', 'python', 'javascript', 'misc',]
 
 " Vundle manages vundle
 Plugin 'gmarik/vundle'
@@ -68,29 +68,44 @@ elseif executable('ack')
 endif
 
 " general plugin {
-Plugin 'kien/ctrlp.vim'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'troydm/easybuffer.vim' "quickly switch between buffers.
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
-Plugin 'spf13/vim-autoclose'
-Plugin 'tpope/vim-surround' "change surrounding.
-Plugin 'tpope/vim-repeat'
-Plugin 'mbbill/undotree'
-if has('python') || has('python3')
-    Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+if count(g:bundle_groups, 'general')
+    Plugin 'ervandew/supertab'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'Lokaltog/vim-easymotion'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'troydm/easybuffer.vim' "quickly switch between buffers.
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'scrooloose/syntastic'
+    Plugin 'spf13/vim-autoclose'
+    Plugin 'tpope/vim-surround' "change surrounding.
+    Plugin 'tpope/vim-repeat'
+    Plugin 'mbbill/undotree'
+    Plugin 'terryma/vim-multiple-cursors'
+    Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'godlygeek/csapprox' "make colorscheme work in terminal
+    Plugin 'nathanaelkane/vim-indent-guides' "visually displaying indent levels
+    Plugin 'taglist.vim'
+    Plugin 'godlygeek/tabular'
+    if has('python') || has('python3')
+        Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+    endif
+    if executable('ctags')
+        Plugin 'majutsushi/tagbar'
+    endif
 endif
 "}
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/ShowMarks'
-Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'bitc/vim-bad-whitespace'
-Plugin 'ciaranm/detectindent'
-if executable('ctags')
-    Plugin 'majutsushi/tagbar'
+
+if count(g:bundle_groups, 'misc')
+    Plugin 'tpope/vim-markdown'
+    Plugin 'nelstrom/vim-markdown-folding'
+    if has('ruby')
+        Plugin 'greyblake/vim-preview' "<leader>P
+    endif
+    Plugin 'exu/pgsql.vim' "postgresql syntax
+    Plugin 'vim-scripts/ShowMarks'
+    Plugin 'bitc/vim-bad-whitespace' "highlight the ending white space.
+    Plugin 'ciaranm/detectindent'
 endif
-Plugin 'jnurmine/Zenburn'
 
 " Snippets & autocomplete {
 if count(g:bundle_groups, 'neocomplete')
@@ -114,6 +129,8 @@ if count(g:bundle_groups, 'javascript')
     Plugin 'moll/vim-node'
     Plugin 'kchmck/vim-coffee-script'
     Plugin 'wookiehangover/jshint.vim'
+    Plugin 'wavded/vim-stylus'
+    Plugin 'marijnh/tern_for_vim' "provides Tern-based JavaScript editing
 endif
 "}
 
@@ -126,44 +143,35 @@ if count(g:bundle_groups, 'python')
 endif
 " }
 
-Plugin 'wavded/vim-stylus'
-Plugin 'taglist.vim'
-"Plugin 'guns/vim-clojure-static'
-"Plugin 'marijnh/tern_for_vim'
-"Plugin 'wting/rust.vim'
-"Plugin 'tpope/vim-liquid'
-"Plugin 'tpope/vim-markdown'
-"Plugin 'psykidellic/vim-jekyll'
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()
+
 filetype plugin indent on
 " Enable syntax highlighting
 syntax enable
 
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
-nnoremap <F2> :TagbarToggle<CR>
 nnoremap <F3> :UndotreeToggle<CR>
 if has("persistent_undo")
     set undodir='~/.undodir/'
     set undofile
 endif
-nnoremap <F4> :NERDTreeToggle<CR>
 
 " In vim, don't do auto close.
 let g:autoclose_vim_commentmode = 1
 
+nnoremap <F2> :TagbarToggle<CR>
 let g:tagbar_usearrows = 1
-
 let g:tagbar_autofocus = 1
+
+nnoremap <F4> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '\~$', '\.o$', '\.class$', '\.out$', '\.o$']
 " close vim if the Nerdtree is the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-"Enable plugin and indenting plugins
-filetype plugin indent on
 
 "change the mapleader from \ to ,
 let mapleader = ","
@@ -184,24 +192,11 @@ let g:ctrlp_working_path_mode = ''
 " Set to auto read when a file is changed from the outside
 set autoread
 
-
 nmap <leader>w :w!<cr>
-
 map <leader>/ <plug>NERDCommenterToggle
 
 set ruler  "Always show current position
 set showcmd "show command in bottom bar
-
-if has('statusline')
-    set laststatus=2
-" Broken down into easily includeable segments
-    set statusline=%<%f\ " Filename
-    set statusline+=%w%h%m%r " Options
-    "set statusline+=%{fugitive#statusline()} " Git Hotness
-    set statusline+=\ [%{&ff}/%Y] " Filetype
-    set statusline+=\ [%{getcwd()}] " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
-endif
 
 " No annoying sound on errors
 set noerrorbells
@@ -324,7 +319,7 @@ map <C-l> <C-w>l
 "My personal mapping
 inoremap <c-d> <del>
 
-set winaltkeys=no 
+set winaltkeys=no
 
 "Toggle paste mode on and off
 nnoremap <leader>pp :setlocal paste!<cr>
