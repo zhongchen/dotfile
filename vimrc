@@ -117,8 +117,6 @@ endif
 let g:neocomplete#enable_at_startup = 1
 " }
 
-Plugin 'mattn/emmet-vim'
-
 " lang specific
 " Javascript {
 if count(g:bundle_groups, 'javascript')
@@ -142,8 +140,6 @@ if count(g:bundle_groups, 'python')
     Plugin 'pythoncomplete'
 endif
 " }
-
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()
