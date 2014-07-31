@@ -86,6 +86,7 @@ if count(g:bundle_groups, 'general')
     Plugin 'nathanaelkane/vim-indent-guides' "visually displaying indent levels
     Plugin 'taglist.vim'
     Plugin 'godlygeek/tabular'
+    Plugin 'tpope/vim-abolish'
     if has('python') || has('python3')
         Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
     endif
@@ -148,7 +149,18 @@ filetype plugin indent on
 " Enable syntax highlighting
 syntax enable
 
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+if has('autocmd')
+    " Return to last edit position when opening files (You want this!)
+    autocmd BufReadPost *
+         \ if line("'\"") > 0 && line("'\"") <= line("$") |
+         \   exe "normal! g`\"" |
+         \ endif
+
+    autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+    autocmd BufNewFile,BufReadPost * :DetectIndent
+    autocmd FileType make setlocal noexpandtab
+    autocmd BufWritePre *.py,*.js :call DeleteTrailingWS()
+endif
 
 nnoremap <F3> :UndotreeToggle<CR>
 if has("persistent_undo")
@@ -271,10 +283,8 @@ vnoremap <space> za
 set foldmethod=expr   " fold based on indent level
 
 " Detect Indent
-let g:detectindent_preferred_expandtab = 1
+let g:detectindent_preferred_expandtab = 4
 let g:detectindent_preferred_indent = 4
-"autocmd BufNewFile,BufReadPost * :DetectIndent
-autocmd FileType make setlocal noexpandtab
 
 "Height of the command bar
 set cmdheight=2
@@ -338,11 +348,6 @@ set hidden "allow buffer switching without saving
 set foldcolumn=1
 
 
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -352,8 +357,6 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 if has('clipboard')
     if has('unnamedplus') " When possible use + register for copy-paste
@@ -452,3 +455,4 @@ if has('unix')
   set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
   inoremap <C-f> <C-x><C-k>
 endif
+
