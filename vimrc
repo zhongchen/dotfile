@@ -157,9 +157,16 @@ if has('autocmd')
          \ endif
 
     autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+    autocmd Filetype python setlocal ts=2 sts=2 sw=2
     autocmd BufNewFile,BufReadPost * :DetectIndent
     autocmd FileType make setlocal noexpandtab
     autocmd BufWritePre *.py,*.js :call DeleteTrailingWS()
+
+    " Disable keybinding in plugins.
+    autocmd VimEnter * unmap ]c
+
+    " Disable keybinding in certain filetype.
+    " autocmd Filetype python unmap! ]c
 endif
 
 nnoremap <F3> :UndotreeToggle<CR>
@@ -455,4 +462,5 @@ if has('unix')
   set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
   inoremap <C-f> <C-x><C-k>
 endif
+
 
