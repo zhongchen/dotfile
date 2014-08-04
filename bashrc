@@ -119,6 +119,7 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
+
 unset color_prompt force_color_prompt
 # Make prompt informative
 # See: http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
@@ -178,9 +179,6 @@ fi
 
 ## Define any user-specific variables you want here.
 #source ~/.bashrc_custom
-unset color_prompt force_color_prompt
-
-alias em='emacs -nw "$@"'
 
 # Git alias
 alias g="git status"
@@ -225,3 +223,4 @@ echo -ne '\e]11;#002b36\a'  # background
 # echo -ne '\e]12;#859900\a'  # cursor
 Term=xterm-256color
 
+alias tmux="TERM=screen-256color-bce tmux"

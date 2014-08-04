@@ -54,7 +54,7 @@ endif
 let g:bundle_groups=['general','neocomplete', 'programming', 'python', 'javascript', 'misc',]
 
 " Vundle manages vundle
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils' "utility library
 Plugin 'tomtom/tlib_vim' "utility library
 if executable('ag')
@@ -109,13 +109,35 @@ if count(g:bundle_groups, 'misc')
 endif
 
 " Snippets & autocomplete {
-if count(g:bundle_groups, 'neocomplete')
+if count(g:bundle_groups, 'neocomplete') && has('lua')
     Plugin 'Shougo/neocomplete.vim.git'
     Plugin 'Shougo/neosnippet'
     Plugin 'Shougo/neosnippet-snippets'
     Plugin 'honza/vim-snippets'
+
+    " neocomplete configuration
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    " Define keyword.
+     if !exists('g:neocomplete#keyword_patterns')
+         let g:neocomplete#keyword_patterns = {}
+     endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+     " Enable heavy omni completion.
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+        let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+    let g:neocomplete#sources#omni#input_patterns.javascript = '[^. \t]\.\w*'
 endif
-let g:neocomplete#enable_at_startup = 1
 " }
 
 " lang specific
@@ -130,6 +152,8 @@ if count(g:bundle_groups, 'javascript')
     Plugin 'wookiehangover/jshint.vim'
     Plugin 'wavded/vim-stylus'
     Plugin 'marijnh/tern_for_vim' "provides Tern-based JavaScript editing
+    let g:tern_show_argument_hints='on_hold'
+    let g:tern_map_keys=1
 endif
 "}
 
