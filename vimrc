@@ -189,6 +189,9 @@ if has('autocmd')
     " Disable keybinding in plugins.
     autocmd VimEnter * unmap ]c
 
+    " Disable error bell in gvim
+    autocmd GUIEnter * set vb t_vb=
+
     " Disable keybinding in certain filetype.
     " autocmd Filetype python unmap! ]c
 endif
@@ -242,6 +245,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+
 
 "Set 7 lines to the cursor when moving vertically using j/k
 set so=7
@@ -487,4 +491,4 @@ if has('unix')
   inoremap <C-f> <C-x><C-k>
 endif
 
-
+nnoremap <f6> :!ctags -R<CR>
