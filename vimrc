@@ -104,7 +104,7 @@ if count(g:bundle_groups, 'misc')
         Plugin 'greyblake/vim-preview' "<leader>P
     endif
     Plugin 'exu/pgsql.vim' "postgresql syntax
-    Plugin 'vim-scripts/ShowMarks'
+    "Plugin 'vim-scripts/ShowMarks'
     Plugin 'bitc/vim-bad-whitespace' "highlight the ending white space.
     Plugin 'ciaranm/detectindent'
 endif
