@@ -1,5 +1,4 @@
-"not compatible with vi, improve performance
-set nocompatible
+set nocompatible "not compatible with vi, improve performance
 filetype off
 
 silent function! OSX()
@@ -171,8 +170,7 @@ endif
 call vundle#end()
 
 filetype plugin indent on
-" Enable syntax highlighting
-syntax enable
+syntax enable " Enable syntax highlighting
 
 if has('autocmd')
     " Return to last edit position when opening files (You want this!)
@@ -190,12 +188,10 @@ if has('autocmd')
     " Disable keybinding in plugins.
     autocmd VimEnter * unmap ]c
 
-
     " Disable keybinding in certain filetype.
     " autocmd Filetype python unmap! ]c
 endif
 
-nnoremap <F3> :UndotreeToggle<CR>
 if has("persistent_undo")
     set undodir='~/.undodir/'
     set undofile
@@ -204,23 +200,10 @@ endif
 " In vim, don't do auto close.
 let g:autoclose_vim_commentmode = 1
 
-nnoremap <F2> :TagbarToggle<CR>
-let g:tagbar_usearrows = 1
-let g:tagbar_autofocus = 1
-
-nnoremap <F4> :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$', '\~$', '\.o$', '\.class$', '\.out$', '\.o$']
-" close vim if the Nerdtree is the only window left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-
-"change the mapleader from \ to ,
 let mapleader = ","
 let g:mapleader = ","
 
-nmap <leader>b :EasyBufferToggle<CR>
-
-set history=666
+set history=1000
 set undolevels=1000
 
 "CtrlP settings
@@ -230,12 +213,7 @@ let g:ctrlp_working_path_mode = ''
 " to-do use external command to speed up ctrlp
 " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
-" Set to auto read when a file is changed from the outside
-set autoread
-
-nmap <leader>w :w!<cr>
-map <leader>/ <plug>NERDCommenterToggle
-
+set autoread "Reload files changed outside vim.
 set ruler  "Always show current position
 set showcmd "show command in bottom bar
 
@@ -247,18 +225,14 @@ set tm=500
 " Disable error bell in gvim
 autocmd GUIEnter * set vb t_vb=
 
-" treat all numbers as decimals.
-set nrformats=
+set nrformats= " treat all numbers as decimals.
 
 " make regexes more friendly
 nnoremap / /\v
 vnoremap / /\v
 
-"Set 7 lines to the cursor when moving vertically using j/k
-set so=7
-
-"show the line number
-set nu
+set so=7 "Set 7 lines to the cursor when moving vertically using j/k
+set nu "show the line number.
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf-8
@@ -292,22 +266,16 @@ set wildignore+=*.orig                           " Merge resolution files
 
 " Highlight problematic whitespace
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
-
-
 set lazyredraw "redraw only when need to
-
 set cc=120
 set title
-
 set hlsearch "highlight matches
-nnoremap <leader><space> :nohlsearch<CR>
 set ignorecase
 set smartcase
 set infercase
 set showmatch "highlight matching [{()}]
 set incsearch "search as characters are entered
 set wrap
-
 
 set winaltkeys=no
 
@@ -364,7 +332,6 @@ map <C-h> <C-w>h
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-"My personal mapping
 inoremap <c-d> <del>
 
 set winaltkeys=no
@@ -382,14 +349,9 @@ nmap <silent> <leader>gr :diffget RE<cr>
 
 "  allow the backspace key to erase previously entered characters, autoindent, and new lines
 set backspace=indent,eol,start
-
 set formatoptions-=o "dont continue comments when pushing o/O
-
 set hidden "allow buffer switching without saving
-
 set foldcolumn=1
-
-
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -496,7 +458,6 @@ endfunction
 " From https://github.com/vim-scripts/google.vim/blob/master/indent/google.vim
 function! GoogleCppIndent()
     let l:cline_num = line('.')
-
     let l:orig_indent = cindent(l:cline_num)
 
     if l:orig_indent == 0 | return 0 | endif
@@ -583,4 +544,21 @@ if has('unix')
   inoremap <C-f> <C-x><C-k>
 endif
 
+nnoremap <F2> :TagbarToggle<CR>
+let g:tagbar_usearrows = 1
+let g:tagbar_autofocus = 1
+
+nnoremap <F3> :UndotreeToggle<CR>
+
+nnoremap <F4> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '\~$', '\.o$', '\.class$', '\.out$', '\.o$']
+" close vim if the Nerdtree is the only window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 nnoremap <f6> :!ctags -R<CR>
+nnoremap <leader>b :EasyBufferToggle<CR>
+nmap <leader>w :w!<cr>
+map <leader>/ <plug>NERDCommenterToggle
+nnoremap <leader><space> :nohlsearch<CR>
+
+
