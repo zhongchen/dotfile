@@ -87,8 +87,15 @@ if count(g:bundle_groups, 'general')
     Plugin 'godlygeek/tabular'
     Plugin 'tpope/vim-abolish'
     Plugin 'PProvost/vim-ps1'
+    Plugin 'mattn/emmet-vim' "html plugin
+    " Enable just for html/css
+    let g:user_emmet_install_global = 0
+    autocmd FileType html,css EmmetInstall
     if has('python') || has('python3')
         Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+        " Powerline setup
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+        set laststatus=2
     endif
     if executable('ctags')
         Plugin 'majutsushi/tagbar'
@@ -163,6 +170,60 @@ if count(g:bundle_groups, 'python')
     Plugin 'python.vim'
     Plugin 'python_match.vim'
     Plugin 'pythoncomplete'
+    Plugin 'davidhalter/jedi-vim'
+endif
+" }
+
+" PyMode {
+" Disable if python support not present
+if !has('python')
+    let g:pymode = 0
+endif
+
+if isdirectory(expand("~/.vim/bundle/python-mode"))
+    let g:pymode_lint_checkers = ['pyflakes']
+    let g:pymode_trim_whitespaces = 0
+    let g:pymode_options = 0
+    let g:pymode_rope = 0
+" K             Show python docs
+" [[            Jump on previous class or function (normal, visual, operator modes)
+" ]]            Jump on next class or function (normal, visual, operator modes)
+" [M            Jump on previous class or method (normal, visual, operator modes)
+" ]M            Jump on next class or method (normal, visual, operator modes)
+    " Documentation
+    let g:pymode_doc = 1
+    let g:pymode_doc_key = 'K'
+
+    "Linting
+    let g:pymode_lint = 1
+    let g:pymode_lint_checker = "pyflakes,pep8"
+    " Auto check on save
+    let g:pymode_lint_write = 1
+
+    " Support virtualenv
+    let g:pymode_virtualenv = 1
+
+    " Enable breakpoints plugin
+    let g:pymode_breakpoint = 1
+    let g:pymode_breakpoint_bind = '<leader>b'
+
+    " syntax highlighting
+    let g:pymode_syntax = 1
+    let g:pymode_syntax_all = 1
+    let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+    let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+    " Override go-to.definition key shortcut to Ctrl-]
+    let g:pymode_rope_goto_definition_bind = "<C-]>"
+
+    " Override run current python file key shortcut
+    let g:pymode_run_bind = "<leader>r"
+
+    " Override view python doc key shortcut
+    "let g:pymode_doc_bind = 
+
+    " Don't autofold code
+    let g:pymode_folding = 0
 endif
 " }
 
@@ -556,7 +617,7 @@ let NERDTreeIgnore = ['\.pyc$', '\~$', '\.o$', '\.class$', '\.out$', '\.o$']
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nnoremap <f6> :!ctags -R<CR>
-nnoremap <leader>b :EasyBufferToggle<CR>
+nnoremap <leader>l :EasyBufferToggle<CR>
 nmap <leader>w :w!<cr>
 map <leader>/ <plug>NERDCommenterToggle
 nnoremap <leader><space> :nohlsearch<CR>

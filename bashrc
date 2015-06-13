@@ -224,3 +224,7 @@ echo -ne '\e]11;#002b36\a'  # background
 Term=xterm-256color
 
 alias tmux="TERM=screen-256color-bce tmux"
+alias zhremote="ssh zhong@zhongml.cloudapp.net"
+
+export WORKON_HOME=$HOME/virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
