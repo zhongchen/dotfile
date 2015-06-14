@@ -141,8 +141,6 @@ set -o noclobber
 
 # 2.2) Listing, directories, and motion
 alias ll="ls -alrtF --color"
-alias ..='cd ..'
-alias ...='cd ..;cd ..'
 alias md='mkdir'
 alias cl='clear'
 alias du='du -ch --max-depth=1'
@@ -152,11 +150,7 @@ alias treeacl='tree -A -C -L 2'
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;31' # green for matches
 
-# 2.5) sort options
-# Ensures cross-platform sorting behavior of GNU sort.
-# http://www.gnu.org/software/coreutils/faq/coreutils-faq.html#Sort-does-not-sort-in-normal-order_0021
-unset LANG
-export LC_ALL=POSIX
+export LC_ALL="en_US.UTF-8"
 
 # 2.6) Install rlwrap if not present
 # http://stackoverflow.com/a/677212
@@ -227,4 +221,4 @@ alias tmux="TERM=screen-256color-bce tmux"
 alias zhremote="ssh zhong@zhongml.cloudapp.net"
 
 export WORKON_HOME=$HOME/virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
