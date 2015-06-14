@@ -64,6 +64,10 @@ export LANG=en_US.UTF-8
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR="vim"
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -117,9 +121,16 @@ echo -ne '\e]10;#eee8d5\a'  # foreground
 echo -ne '\e]11;#002b36\a'  # background
 # echo -ne '\e]12;#859900\a'  # cursor
 Term=xterm-256color
-
 alias tmux="TERM=screen-256color-bce tmux"
 alias zhremote="ssh zhong@zhongml.cloudapp.net"
 
-export WORKON_HOME=$HOME/virtualenvs
-#source /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/PythonProjects
+source /usr/local/bin/virtualenvwrapper.sh
+
+
+# 2.1) Safety
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+set -o noclobber
