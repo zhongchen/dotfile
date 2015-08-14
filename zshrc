@@ -134,3 +134,5 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 set -o noclobber
+
+export PATH=$PATH:/home/zhong/sbt/bin

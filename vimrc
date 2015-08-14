@@ -88,6 +88,7 @@ if count(g:bundle_groups, 'general')
     Plugin 'tpope/vim-abolish'
     Plugin 'PProvost/vim-ps1'
     Plugin 'mattn/emmet-vim' "html plugin
+    Plugin 'derekwyatt/vim-scala'
     " Enable just for html/css
     let g:user_emmet_install_global = 0
     autocmd FileType html,css EmmetInstall
