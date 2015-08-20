@@ -69,6 +69,7 @@ endif
 " general plugin {
 if count(g:bundle_groups, 'general')
     Plugin 'ervandew/supertab'
+    Plugin 'tpope/vim-sensible'
     Plugin 'kien/ctrlp.vim'
     Plugin 'Lokaltog/vim-easymotion'
     Plugin 'scrooloose/nerdtree'
