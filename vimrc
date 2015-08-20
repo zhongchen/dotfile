@@ -46,7 +46,7 @@ if WINDOWS()
     let path='~/vimfiles/bundle'
     call vundle#begin(path)
 else
-    set rtp+=~/dotfile/vim/bundle/Vundle.vim
+    set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 endif
 
