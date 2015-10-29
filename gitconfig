@@ -1,10 +1,11 @@
 [user]
-	name = Zhong
-	email = zchen87@gmail.com
+	name = zhong
+	email = zhong@sumologic.com
 [credential]
 	helper = cache --timeout=36000
 [core]
 	editor = vim
+	excludesfile = /Users/zhong/.gitignore_global
 [diff]
 	tool = vimdiff
 [difftool]
@@ -16,3 +17,15 @@
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
+[color]
+	ui = auto
+[push]
+	default = upstream
+[remote "origin"]
+	tagopt = --no-tags
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
