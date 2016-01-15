@@ -3,6 +3,7 @@ brew install tmux
 brew install macvim
 brew install curl git git-flow wget zinc
 brew install caskroom/cask/brew-cask
+brew install ssh-copy-id
 brew cask install iterm2
 brew tap caskroom/versions
 brew cask install java7

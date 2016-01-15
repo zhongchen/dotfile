@@ -108,6 +108,7 @@ endif
 if count(g:bundle_groups, 'misc')
     Plugin 'tpope/vim-markdown'
     Plugin 'nelstrom/vim-markdown-folding'
+    Plugin 'JamshedVesuna/vim-markdown-preview'
     if has('ruby')
         Plugin 'greyblake/vim-preview' "<leader>P
     endif
