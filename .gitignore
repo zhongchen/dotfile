@@ -5,6 +5,7 @@ ac-comphist.dat
 vim/bundle
 *~
 target/
+vim/init.vim
 
 
 

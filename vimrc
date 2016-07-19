@@ -90,6 +90,7 @@ if count(g:bundle_groups, 'general')
     Plugin 'PProvost/vim-ps1'
     Plugin 'mattn/emmet-vim' "html plugin
     Plugin 'derekwyatt/vim-scala'
+    Plugin 'fatih/vim-go'
     " Enable just for html/css
     let g:user_emmet_install_global = 0
     autocmd FileType html,css EmmetInstall
@@ -632,4 +633,31 @@ nmap <leader>w :w!<cr>
 map <leader>/ <plug>NERDCommenterToggle
 nnoremap <leader><space> :nohlsearch<CR>
 
+set autowrite
 
+" quickfix window
+map <leader>en :cnext <CR>
+map <leader>ep :cprevious <CR>
+map <leader>ec :cclose <CR>
+
+" Vim Go mapping
+" https://github.com/fatih/vim-go-tutorial
+autocmd FileType go nmap <leader>gr  <Plug>(go-run)
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+autocmd FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+autocmd FileType go nmap <Leader>gt <Plug>(go-test)
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
