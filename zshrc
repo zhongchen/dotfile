@@ -314,3 +314,11 @@ function frameworkpython {
 
 # # Tail all files matching `.log` under the given directory
  alias logtail='find | grep "\.log$" | xargs tail -f'
+
+ export TERM=xterm-256color
+ export EDITOR=vim
+
+ # Use Homebrew's directories instead of ~/.jenv for configs. This is optional.
+export JENV_ROOT=/usr/local/var/jenv
+ # # Enable shims and autocompletion for jenv.
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
