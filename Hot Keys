@@ -1,0 +1,20 @@
+Intellij
+cmd + e recent files
+cmd + shift + v paste from history
+cmd + o find class
+option + tab switch between splits
+cmd + shift + a 
+cmd + shift + h call hierarchy
+cmd + shift + [ switch between open tabs
+cmd + shift + delete last edit location
+cmd + F12 structure view
+ctrl + shift + p show type
+alt + <F7> show usages
+cmd + <F7> show usages in the file
+cmd + shift + <F7> hight all usage
+
+
+cmd must have
+ctrl+x ctrl+e open vim in cmd
+
+
