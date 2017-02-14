@@ -85,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 #
 export DEV_HOME=~/Development
 export SUMO_HOME=~/Development/sumo
+export SUMO_KNOBS=~/Development/knobs
 alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
 alias props="${SUMO_HOME}/system/bin/local-props-updater.py"
 export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
@@ -151,7 +152,7 @@ alias gau="git add -u"
 alias gc="git commit -m"
 alias gcamend="git commit --amend --no-edit"
 alias gbd="git branch -d"
-alias gch="git checkout"
+alias gch="git branch | percol | awk git checkout"
 alias gchb="git checkout -b"
 alias gt="git stash"
 alias gta="git stash apply"
@@ -322,3 +323,54 @@ function frameworkpython {
 export JENV_ROOT=/usr/local/var/jenv
  # # Enable shims and autocompletion for jenv.
 if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+
+
+function ppgrep() {
+    if [[ $1 == "" ]]; then
+        PERCOL=percol
+    else
+        PERCOL="percol --query $1"
+    fi
+    ps aux | eval $PERCOL | awk '{ print $2 }'
+}
+
+function ppkill() {
+    if [[ $1 =~ "^-" ]]; then
+        QUERY=""            # options only
+    else
+        QUERY=$1            # with a query
+        [[ $# > 0 ]] && shift
+    fi
+    ppgrep $QUERY | xargs kill $*
+}
+
+function exists { which $1 &> /dev/null }
+
+if exists percol; then
+    function percol_select_history() {
+        local tac
+        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+        CURSOR=$#BUFFER         # move cursor
+        zle -R -c               # refresh
+    }
+
+    zle -N percol_select_history
+    bindkey '^R' percol_select_history
+fi
+
+function pattach() {
+    if [[ $1 == "" ]]; then
+        PERCOL=percol
+    else
+        PERCOL="percol --query $1"
+    fi
+
+    sessions=$(tmux ls)
+    [ $? -ne 0 ] && return
+
+    session=$(echo $sessions | eval $PERCOL | cut -d : -f 1)
+    if [[ -n "$session" ]]; then
+        tmux att -t $session
+    fi
+}
