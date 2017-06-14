@@ -151,8 +151,9 @@ alias gaa="git add ."
 alias gau="git add -u"
 alias gc="git commit -m"
 alias gcamend="git commit --amend --no-edit"
-alias gbd="git branch -d"
-alias gch="git branch | percol | awk git checkout"
+alias gbd="git branch -D"
+alias gb="git branch | percol | xargs git checkout"
+alias gch="git checkout"
 alias gchb="git checkout -b"
 alias gt="git stash"
 alias gta="git stash apply"
@@ -373,4 +374,28 @@ function pattach() {
     if [[ -n "$session" ]]; then
         tmux att -t $session
     fi
+}
+
+till_failure () {
+    if [ $# -le 0 ]
+    then
+        echo "Usage: $0 <cmd> <repeatAmount>"
+        return -1
+    fi
+    local REPEAT_CMD="$1"
+    local REPEAT_AMOUNT=9999
+    if [ $# -gt 1 ]
+    then
+        REPEAT_AMOUNT=$2
+    fi
+    local I=0
+    local EXIT_CODE=0
+    while [[ $I -lt $REPEAT_AMOUNT ]] && [[ $EXIT_CODE -eq 0 ]]
+    do
+        I=$((I + 1))
+        echo "Executing repetition ${I}..."
+        eval $REPEAT_CMD
+        EXIT_CODE=$?
+    done
+    return $EXIT_CODE
 }
