@@ -88,10 +88,10 @@ export SUMO_HOME=~/Development/sumo
 export SUMO_KNOBS=~/Development/knobs
 alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
 alias props="${SUMO_HOME}/system/bin/local-props-updater.py"
-export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
+export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.9
 export MAVEN_OPTS="-Xmx1024m -Djava.awt.headless=true"
 export PATH=/opt/local/bin:/usr/local/bin:$MVN_HOME/bin:$PATH
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/
 
 # Note: ~/.ssh/environment should not be used, as it
 #       already has a different purpose in SSH.
