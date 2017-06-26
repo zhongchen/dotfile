@@ -399,3 +399,5 @@ till_failure () {
     done
     return $EXIT_CODE
 }
+
+alias vim="/usr/local/bin/vim"
