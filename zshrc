@@ -3,9 +3,8 @@ export ZSH=/Users/zhong/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
+
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -86,9 +85,8 @@ source $ZSH/oh-my-zsh.sh
 export DEV_HOME=~/Development
 export SUMO_HOME=~/Development/sumo
 export SUMO_KNOBS=~/Development/knobs
-alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
 alias props="${SUMO_HOME}/system/bin/local-props-updater.py"
-export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.9
+export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
 export MAVEN_OPTS="-Xmx1024m -Djava.awt.headless=true"
 export PATH=/opt/local/bin:/usr/local/bin:$MVN_HOME/bin:$PATH
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/
@@ -265,7 +263,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias datarepositoryfactory='cd /Users/zhong/Development/analytics-experiments/DataRepositoryfactory'
 alias dataretriever='cd /Users/zhong/Development/analytics-experiments/DataRetriever'
 
-
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export PIP_REQUIRE_VIRTUALENV=false
 #export PIP_REQUIRE_VIRTUALENV=true
 gpip() {
@@ -416,3 +414,14 @@ PERL_MM_OPT="INSTALL_BASE=/Users/zhong/perl5"; export PERL_MM_OPT;
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+#alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
+dsh () {
+    pushd $SUMO_HOME/ops
+    ../bin/run-app.sh com.sumologic.ops.scala.aws.deploy.shell.DeployerShell $@
+    popd
+}
+
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
