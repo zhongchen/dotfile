@@ -5,32 +5,6 @@ export ZSH=/Users/zhong/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="robbyrussell"
 
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
@@ -221,7 +195,6 @@ alias sumodirparsetest="cd $SUMO_HOME/parse/src/test/scala/com/sumologic/scala/p
 alias sumopropsupdate='$SUMO_HOME/system/bin/local-props-updater.py'
 alias sumojira='gl --author="Zhong Chen" --pretty=format:%s4m | grep -oE "^SUMO-[0-9]+" | head -1 | pbcopy'
 alias deletemergedbranches='git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'
-alias sumopursedeployment='dsh -d zhc dep stop -v'
 alias start-dynamo="$SUMO_HOME/system/bin/third-party/start-dynamodb.sh"
 alias stop-dynamo="$SUMO_HOME/system/bin/third-party/stop-dynamodb.sh"
 
@@ -260,8 +233,6 @@ sumodownonly() {
 
 
 alias ctags="`brew --prefix`/bin/ctags"
-alias datarepositoryfactory='cd /Users/zhong/Development/analytics-experiments/DataRepositoryfactory'
-alias dataretriever='cd /Users/zhong/Development/analytics-experiments/DataRetriever'
 
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export PIP_REQUIRE_VIRTUALENV=false
@@ -425,3 +396,25 @@ dsh () {
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function extract()
+{
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1     ;;
+            *.tar.gz)    tar xvzf $1     ;;
+            *.bz2)       bunzip2 $1      ;;
+            *.rar)       unrar x $1      ;;
+            *.gz)        gunzip $1       ;;
+            *.tar)       tar xvf $1      ;;
+            *.tbz2)      tar xvjf $1     ;;
+            *.tgz)       tar xvzf $1     ;;
+            *.zip)       unzip $1        ;;
+            *.Z)         uncompress $1   ;;
+            *.7z)        7z x $1         ;;
+            *)           echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}
