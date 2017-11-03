@@ -185,18 +185,11 @@ unmount-encrypted()
 }
 
 alias sumobuild=${SUMO_HOME}/bin/quick-assemble.sh -c -q
-alias sumocleanbuild=${SUMO_HOME}/bin/quick-assemble.sh
-alias sumotest=${SUMO_HOME}/bin/quick-assemble.sh -t
 alias sumopull=${SUMO_HOME}/bin/pull.sh
 alias sumopush=${SUMO_HOME}/bin/push-current-branch.sh
-alias sumochanges=${SUMO_HOME}/bin/find-uncommitted-changes.sh
-alias sumodirparse="cd $SUMO_HOME/parse/src/main/scala/com/sumologic/scala/parse/learn/"
-alias sumodirparsetest="cd $SUMO_HOME/parse/src/test/scala/com/sumologic/scala/parse/learn/"
 alias sumopropsupdate='$SUMO_HOME/system/bin/local-props-updater.py'
 alias sumojira='gl --author="Zhong Chen" --pretty=format:%s4m | grep -oE "^SUMO-[0-9]+" | head -1 | pbcopy'
 alias deletemergedbranches='git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'
-alias start-dynamo="$SUMO_HOME/system/bin/third-party/start-dynamodb.sh"
-alias stop-dynamo="$SUMO_HOME/system/bin/third-party/stop-dynamodb.sh"
 
 # Run an individual unit test when in the relevant module directory eg:
 # unittest ReliableCuratorLockTest
@@ -207,7 +200,7 @@ function unittest() {
 
 # Start sumologic locally
 sumoup() {
-  if $SUMO_HOME/system/bin/pre-integration-tests.sh -z 10 $@ ; then
+  if $SUMO_HOME/system/bin/pre-integration-tests.sh $@ ; then
       notify "Sumo" "Launcher" "Sumo is running! ($@)"
   else
       notify "Sumo" "Launcher" "Sumo failed to launch: $@"
@@ -292,8 +285,11 @@ function frameworkpython {
  # Use Homebrew's directories instead of ~/.jenv for configs. This is optional.
 export JENV_ROOT=/usr/local/var/jenv
  # # Enable shims and autocompletion for jenv.
-if which jenv > /dev/null; then eval "$(jenv init -)"; fi
-
+if which jenv > /dev/null; 
+then 
+ eval "$(jenv init - --no-rehash)"; 
+ (jenv rehash &) 2> /dev/null
+fi
 
 function ppgrep() {
     if [[ $1 == "" ]]; then
@@ -418,3 +414,12 @@ function extract()
         echo "'$1' is not a valid file!"
     fi
 }
+
+function deployAssembly()
+{
+    sh ~/deploy.sh
+}
+
+#docker-machine shell prompt
+#PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
+
