@@ -1,3 +1,4 @@
+" required for vundle
 set nocompatible "not compatible with vi, improve performance
 filetype off
 
@@ -46,18 +47,18 @@ if WINDOWS()
     let path='~/vimfiles/bundle'
     call vundle#begin(path)
 else
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
+    set rtp+=~/.vim/bundles/repos/github.com/Shougo/dein.vim/
 endif
 
-let g:bundle_groups=['general','neocomplete', 'programming', 'python', 'javascript', 'misc',]
+"let g:bundle_groups=['general','neocomplete', 'programming', 'python', 'javascript', 'misc',]
+let g:bundle_groups=[]
 
-" Vundle manages vundle
-Plugin 'gmarik/Vundle.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils' "utility library
-Plugin 'tomtom/tlib_vim' "utility library
+" let Vundle manage Vundle, required
+"Plugin 'MarcWeber/vim-addon-mw-utils' "utility library
+"Plugin 'tomtom/tlib_vim' "utility library
+
 if executable('ag')
-    Plugin 'mileszs/ack.vim'
+"    Plugin 'mileszs/ack.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 elseif executable('ack-grep')
     let g:ackprg="ack-grep -H --nocolor --nogroup --column"

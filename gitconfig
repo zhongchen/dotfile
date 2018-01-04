@@ -4,31 +4,32 @@
 [credential]
 	helper = cache --timeout=36000
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /Users/zhong/.gitignore_global
 [diff]
-	tool = vimdiff
+	tool = meld
 [difftool]
 	prompt = false
+[difftool "meld"]
+    trustExitCode = true
+    cmd = open -W -a Meld --args \"$LOCAL\" \"$REMOTE\"
 [alias]
 	d = difftool
     m = mergetool
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+	tool = meld
+[mergetool]
+    prompt = false
+[mergetool "meld"]
+    trustExitCode = true
+    cmd = open -W -a Meld --args --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"
 [color]
 	ui = auto
 [push]
 	default = upstream
 [remote "origin"]
 	tagopt = --no-tags
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
