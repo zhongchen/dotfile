@@ -2,10 +2,12 @@ tags
 *.elc
 *.pyc
 ac-comphist.dat
-vim/bundle
+vim/bundles
 *~
 target/
 vim/init.vim
+vim/.netrwhist
+
 
 
 

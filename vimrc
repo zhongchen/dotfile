@@ -38,7 +38,9 @@ endif
 
 if !WINDOWS()
     let $BASH_ENV="~/.bash_profile"
-    set shell=/bin/bash
+" I spent more than 10 hours to change the shell from bash to sh to fix a
+" weird vim startup issue.
+    set shell=/bin/sh
 endif
 
 " set the runtime path to include Vundle and initialize
@@ -47,144 +49,150 @@ if WINDOWS()
     let path='~/vimfiles/bundle'
     call vundle#begin(path)
 else
-    set rtp+=~/.vim/bundles/repos/github.com/Shougo/dein.vim/
+    set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim/
 endif
 
-"let g:bundle_groups=['general','neocomplete', 'programming', 'python', 'javascript', 'misc',]
-let g:bundle_groups=[]
+if dein#load_state(expand('~/.vim/bundles'))
+    call dein#begin(expand('~/.vim/bundles'))
 
-" let Vundle manage Vundle, required
-"Plugin 'MarcWeber/vim-addon-mw-utils' "utility library
-"Plugin 'tomtom/tlib_vim' "utility library
-
-if executable('ag')
-"    Plugin 'mileszs/ack.vim'
-    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-elseif executable('ack-grep')
-    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-    Plugin 'mileszs/ack.vim'
-elseif executable('ack')
-    Plugin 'mileszs/ack.vim'
-endif
-
-" general plugin {
-if count(g:bundle_groups, 'general')
-    Plugin 'ervandew/supertab'
-    Plugin 'tpope/vim-sensible'
-    Plugin 'kien/ctrlp.vim'
-    Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'troydm/easybuffer.vim' "quickly switch between buffers.
-    Plugin 'scrooloose/nerdcommenter'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'spf13/vim-autoclose'
-    Plugin 'tpope/vim-surround' "change surrounding.
-    Plugin 'tpope/vim-repeat'
-    Plugin 'mbbill/undotree'
-    Plugin 'terryma/vim-multiple-cursors'
-    Plugin 'jistr/vim-nerdtree-tabs'
-    Plugin 'godlygeek/csapprox' "make colorscheme work in terminal
-    Plugin 'nathanaelkane/vim-indent-guides' "visually displaying indent levels
-    Plugin 'taglist.vim'
-    Plugin 'godlygeek/tabular'
-    Plugin 'tpope/vim-abolish'
-    Plugin 'PProvost/vim-ps1'
-    Plugin 'mattn/emmet-vim' "html plugin
-    Plugin 'derekwyatt/vim-scala'
-    Plugin 'fatih/vim-go'
-    " Enable just for html/css
-    let g:user_emmet_install_global = 0
-    autocmd FileType html,css EmmetInstall
-    if has('python') || has('python3')
-        Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-        " Powerline setup
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-        set laststatus=2
+    call dein#add('Shougo/dein.vim')
+    call dein#add('Shougo/deoplete.nvim')
+    if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
     endif
-    if executable('ctags')
-        Plugin 'majutsushi/tagbar'
+
+    let g:bundle_groups=['general','neocomplete', 'programming', 'python', 'javascript', 'misc']
+
+    call dein#add('MarcWeber/vim-addon-mw-utils') "utility library
+    call dein#add('tomtom/tlib_vim') "utility library
+
+    if executable('ag')
+        call dein#add('mileszs/ack.vim')
+        let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+    elseif executable('ack-grep')
+        let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+        call dein#add('mileszs/ack.vim'))
+    elseif executable('ack')
+        call dein#add('mileszs/ack.vim')
     endif
-endif
-"}
 
-if count(g:bundle_groups, 'misc')
-    Plugin 'tpope/vim-markdown'
-    Plugin 'nelstrom/vim-markdown-folding'
-    Plugin 'JamshedVesuna/vim-markdown-preview'
-    if has('ruby')
-        Plugin 'greyblake/vim-preview' "<leader>P
+    " general plugin {
+    if count(g:bundle_groups, 'general')
+        call dein#add('ervandew/supertab')
+        call dein#add('tpope/vim-sensible')
+        call dein#add('kien/ctrlp.vim')
+        call dein#add('Lokaltog/vim-easymotion')
+        call dein#add('scrooloose/nerdtree')
+        call dein#add('troydm/easybuffer.vim') "quickly switch between buffers.
+        call dein#add('scrooloose/nerdcommenter')
+        call dein#add('scrooloose/syntastic')
+        call dein#add('spf13/vim-autoclose')
+        call dein#add('tpope/vim-surround') "change surrounding.
+        call dein#add('tpope/vim-repeat')
+        call dein#add('mbbill/undotree')
+        call dein#add('terryma/vim-multiple-cursors')
+        call dein#add('jistr/vim-nerdtree-tabs')
+        call dein#add('godlygeek/csapprox') "make colorscheme work in terminal
+        call dein#add('nathanaelkane/vim-indent-guides') "visually displaying indent levels
+        call dein#add('vim-scripts/taglist.vim')
+        call dein#add('godlygeek/tabular')
+        call dein#add('tpope/vim-abolish')
+        call dein#add('PProvost/vim-ps1')
+        call dein#add('mattn/emmet-vim') "html plugin
+        call dein#add('derekwyatt/vim-scala')
+        call dein#add('fatih/vim-go')
+        " Enable just for html/css
+        let g:user_emmet_install_global = 0
+        autocmd FileType html,css EmmetInstall
+        if executable('ctags')
+            call dein#add('majutsushi/tagbar')
+        endif
     endif
-    Plugin 'exu/pgsql.vim' "postgresql syntax
-    "Plugin 'vim-scripts/ShowMarks'
-    Plugin 'bitc/vim-bad-whitespace' "highlight the ending white space.
-    Plugin 'ciaranm/detectindent'
-endif
+    "}
 
-" Snippets & autocomplete {
-if count(g:bundle_groups, 'neocomplete') && has('lua')
-    Plugin 'Shougo/neocomplete.vim.git'
-    Plugin 'Shougo/neosnippet'
-    Plugin 'Shougo/neosnippet-snippets'
-    Plugin 'honza/vim-snippets'
-
-    " neocomplete configuration
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-    " Define keyword.
-     if !exists('g:neocomplete#keyword_patterns')
-         let g:neocomplete#keyword_patterns = {}
-     endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-     " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
+    if count(g:bundle_groups, 'misc')
+        call dein#add('tpope/vim-markdown')
+        call dein#add('nelstrom/vim-markdown-folding')
+        call dein#add('JamshedVesuna/vim-markdown-preview')
+        if has('ruby')
+            call dein#add('greyblake/vim-preview') "<leader>P
+        endif
+        call dein#add('exu/pgsql.vim') "postgresql syntax
+        call dein#add('bitc/vim-bad-whitespace') "highlight the ending white space.
+        call dein#add('ciaranm/detectindent')
     endif
-    let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplete#sources#omni#input_patterns.javascript = '[^. \t]\.\w*'
-endif
-" }
 
-" lang specific
-" Javascript {
-if count(g:bundle_groups, 'javascript')
-    Plugin 'elzr/vim-json'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'jelera/vim-javascript-syntax'
-    Plugin 'digitaltoad/vim-jade'
-    Plugin 'moll/vim-node'
-    Plugin 'kchmck/vim-coffee-script'
-    Plugin 'wookiehangover/jshint.vim'
-    Plugin 'wavded/vim-stylus'
-    Plugin 'marijnh/tern_for_vim' "provides Tern-based JavaScript editing
-    let g:tern_show_argument_hints='on_hold'
-    let g:tern_map_keys=1
-endif
-"}
+    " Snippets & autocomplete {
+    if count(g:bundle_groups, 'neocomplete') && has('lua')
+        call dein#add('Shougo/neocomplete.vim.git')
+        call dein#add('Shougo/neosnippet')
+        call dein#add('Shougo/neosnippet-snippets')
+        call dein#add('honza/vim-snippets')
 
-" Python {
-if count(g:bundle_groups, 'python')
-    Plugin 'klen/python-mode'
-    Plugin 'python.vim'
-    Plugin 'python_match.vim'
-    Plugin 'pythoncomplete'
-    Plugin 'davidhalter/jedi-vim'
-    let g:jedi#goto_command = "<leader>d"
-    let g:jedi#goto_assignments_command = "<leader>g"
-    let g:jedi#goto_definitions_command = ""
-    let g:jedi#documentation_command = "K"
-    let g:jedi#usages_command = "<leader>n"
-    let g:jedi#completions_command = "<C-Space>"
-    let g:jedi#rename_command = "<leader>r"
+        " neocomplete configuration
+        let g:neocomplete#enable_at_startup = 1
+        let g:neocomplete#enable_smart_case = 1
+        " Set minimum syntax keyword length.
+        let g:neocomplete#sources#syntax#min_keyword_length = 3
+        let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+        " Define keyword.
+         if !exists('g:neocomplete#keyword_patterns')
+             let g:neocomplete#keyword_patterns = {}
+         endif
+        let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+         " Enable heavy omni completion.
+        if !exists('g:neocomplete#sources#omni#input_patterns')
+            let g:neocomplete#sources#omni#input_patterns = {}
+        endif
+        let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+        let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+        let g:neocomplete#sources#omni#input_patterns.javascript = '[^. \t]\.\w*'
+    endif
+    " }
+
+    " lang specific
+    " Javascript {
+    if count(g:bundle_groups, 'javascript')
+        call dein#add('elzr/vim-json')
+        call dein#add('pangloss/vim-javascript')
+        call dein#add('jelera/vim-javascript-syntax')
+        call dein#add('digitaltoad/vim-jade')
+        call dein#add('moll/vim-node')
+        call dein#add('kchmck/vim-coffee-script')
+        call dein#add('wookiehangover/jshint.vim')
+        call dein#add('wavded/vim-stylus')
+        call dein#add('marijnh/tern_for_vim') "provides Tern-based JavaScript editing
+        let g:tern_show_argument_hints='on_hold'
+        let g:tern_map_keys=1
+    endif
+    "}
+
+    " Python {
+    if count(g:bundle_groups, 'python')
+        call dein#add('python-mode/python-mode')
+        call dein#add('vim-scripts/python.vim')
+        call dein#add('vim-scripts/python_match.vim')
+        call dein#add('vim-scripts/pythoncomplete')
+        call dein#add('davidhalter/jedi-vim')
+        let g:jedi#goto_command = "<leader>d"
+        let g:jedi#goto_assignments_command = "<leader>g"
+        let g:jedi#goto_definitions_command = ""
+        let g:jedi#documentation_command = "K"
+        let g:jedi#usages_command = "<leader>n"
+        let g:jedi#completions_command = "<C-Space>"
+        let g:jedi#rename_command = "<leader>r"
+    endif
+    " }
+
+  call dein#end()
+  call dein#save_state()
 endif
-" }
+
 
 " PyMode {
 " Disable if python support not present
@@ -192,7 +200,7 @@ if !has('python')
     let g:pymode = 0
 endif
 
-if isdirectory(expand("~/.vim/bundle/python-mode"))
+if isdirectory(expand("~/.vim/bundles/repos/github.com/python-mode/python-mode"))
     let g:pymode_lint_checkers = ['pyflakes']
     let g:pymode_trim_whitespaces = 0
     let g:pymode_options = 0
@@ -239,8 +247,6 @@ if isdirectory(expand("~/.vim/bundle/python-mode"))
 endif
 " }
 
-" All of your Plugins must be added before the following line
-call vundle#end()
 
 filetype plugin indent on
 syntax enable " Enable syntax highlighting
@@ -257,12 +263,6 @@ if has('autocmd')
     autocmd BufNewFile,BufReadPost * :DetectIndent
     autocmd FileType make setlocal noexpandtab
     autocmd BufWritePre *.py,*.js :call DeleteTrailingWS()
-
-    " Disable keybinding in plugins.
-    autocmd VimEnter * unmap ]c
-
-    " Disable keybinding in certain filetype.
-    " autocmd Filetype python unmap! ]c
 endif
 
 if has("persistent_undo")
@@ -667,4 +667,4 @@ if has('nvim')
     let s:editor_root=expand("~/.config/nvim")
 else
     let s:editor_root=expand("~/.vim")
-endi
+endif
