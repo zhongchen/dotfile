@@ -14,11 +14,11 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git,aws)
 
 # User configuration
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH=/Users/zhongchen/.local/bin:$PATH
+export PATH=/Users/$USER/.local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -190,7 +190,7 @@ pr () {
 export QUICK_ASSEMBLE_NO_SNAPSHOTS=true
 export QUICK_ASSEMBLE_SKIP_NEXUS_CHECK=true
 
-export GOPATH="/Users/zhong/go"
+export GOPATH="/Users/$USER/go"
 export GOROOT="/usr/local/Cellar/go/1.10/libexec/"
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
