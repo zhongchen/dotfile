@@ -191,7 +191,7 @@ export QUICK_ASSEMBLE_NO_SNAPSHOTS=true
 export QUICK_ASSEMBLE_SKIP_NEXUS_CHECK=true
 
 export GOPATH="/Users/$USER/go"
-export GOROOT="/usr/local/Cellar/go/1.10/libexec/"
+export GOROOT="/usr/local/opt/go/libexec/"
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 function frameworkpython {
