@@ -103,7 +103,7 @@ alias gau="git add -u"
 alias gc="git commit -m"
 alias gcamend="git commit --amend --no-edit"
 alias gbd="git branch -D"
-alias gb="git branch | percol | xargs git checkout"
+alias gb="git branch | peco | xargs git checkout"
 alias gch="git checkout"
 alias gchb="git checkout -b"
 alias gt="git stash"
@@ -352,3 +352,7 @@ function deployAssembly()
 #docker-machine shell prompt
 #PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 
+export PIPENV_VENV_IN_PROJECT=1
+
+# pyenv setup
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
