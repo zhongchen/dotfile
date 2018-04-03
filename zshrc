@@ -103,7 +103,7 @@ alias gau="git add -u"
 alias gc="git commit -m"
 alias gcamend="git commit --amend --no-edit"
 alias gbd="git branch -D"
-alias gb="git branch | percol | xargs git checkout"
+alias gb="git branch | peco | xargs git checkout"
 alias gch="git checkout"
 alias gchb="git checkout -b"
 alias gt="git stash"
@@ -222,11 +222,11 @@ fi
 
 function ppgrep() {
     if [[ $1 == "" ]]; then
-        PERCOL=percol
+        PECO=peco
     else
-        PERCOL="percol --query $1"
+        PECO="peco --query $1"
     fi
-    ps aux | eval $PERCOL | awk '{ print $2 }'
+    ps aux | eval $PECO | awk '{ print $2 }'
 }
 
 function ppkill() {
@@ -241,30 +241,30 @@ function ppkill() {
 
 function exists { which $1 &> /dev/null }
 
-if exists percol; then
-    function percol_select_history() {
+if exists peco; then
+    function peco_select_history() {
         local tac
         exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+        BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
         CURSOR=$#BUFFER         # move cursor
         zle -R -c               # refresh
     }
 
-    zle -N percol_select_history
-    bindkey '^R' percol_select_history
+    zle -N peco_select_history
+    bindkey '^R' peco_select_history
 fi
 
 function pattach() {
     if [[ $1 == "" ]]; then
-        PERCOL=percol
+        PECO=peco
     else
-        PERCOL="percol --query $1"
+        PECO="peco --query $1"
     fi
 
     sessions=$(tmux ls)
     [ $? -ne 0 ] && return
 
-    session=$(echo $sessions | eval $PERCOL | cut -d : -f 1)
+    session=$(echo $sessions | eval $PECO | cut -d : -f 1)
     if [[ -n "$session" ]]; then
         tmux att -t $session
     fi
@@ -352,3 +352,7 @@ function deployAssembly()
 #docker-machine shell prompt
 #PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 
+export PIPENV_VENV_IN_PROJECT=1
+
+# pyenv setup
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
