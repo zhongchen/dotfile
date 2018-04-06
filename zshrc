@@ -119,7 +119,6 @@ alias gpl="git pull"
 
 Term=xterm-256color
 alias tmux="TERM=screen-256color-bce tmux"
-alias zhremote="ssh zhong@zhongml.cloudapp.net"
 
 # 2.1) Safety
 alias rm="rm -i"
@@ -317,8 +316,6 @@ dsh () {
     ../bin/run-app.sh com.sumologic.ops.scala.aws.deploy.shell.DeployerShell $@
     popd
 }
-
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
