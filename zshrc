@@ -156,15 +156,9 @@ function unittest() {
 
 alias ctags="`brew --prefix`/bin/ctags"
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export PIP_REQUIRE_VIRTUALENV=false
-#export PIP_REQUIRE_VIRTUALENV=true
-gpip() {
-  PIP_REQUIRE_VIRTUALENV="" pip "$@"
-}
 
 #set up for virtual env wrapper
-#source /usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/Experiment
 export PROJECT_HOME=~/Experiments
 
