@@ -347,3 +347,4 @@ export PIPENV_VENV_IN_PROJECT=1
 
 # pyenv setup
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv-virtualenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
