@@ -14,7 +14,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git,aws)
+plugins=(git,aws,go)
 
 # User configuration
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -180,6 +180,13 @@ pr () {
     open "https://github.com/Sanyaku/sumologic/compare/$MERGE_BRANCH...$CURRENT_BRANCH"
 }
 
+pr2 () {
+  if [ -n "$1" ]
+  REPO=${PWD##*/}
+  CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD` 
+  open "https://github.com/Sanyaku/$REPO/compare/master...$CURRENT_BRANCH"
+}
+
 export QUICK_ASSEMBLE_NO_SNAPSHOTS=true
 export QUICK_ASSEMBLE_SKIP_NEXUS_CHECK=true
 
@@ -304,12 +311,7 @@ PERL_MM_OPT="INSTALL_BASE=/Users/zhong/perl5"; export PERL_MM_OPT;
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-#alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
-dsh () {
-    pushd $SUMO_HOME/ops
-    ../bin/run-app.sh com.sumologic.ops.scala.aws.deploy.shell.DeployerShell $@
-    popd
-}
+alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -348,3 +350,8 @@ export PIPENV_VENV_IN_PROJECT=1
 # pyenv setup
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# sumo stuff
+export ONE_PASSWORD_HACKY_INTEGRATION=OFF
+
+export AIRFLOW_HOME=~/airflow
