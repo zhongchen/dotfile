@@ -141,7 +141,22 @@ unmount-encrypted()
   diskutil eject /Volumes/Encrypted
 }
 
-alias sumobuild=${SUMO_HOME}/bin/quick-assemble.sh -c -q
+mount-encrypted-personal()
+{
+  hdiutil attach ~/Dropbox/personal_encrypted.dmg -readonly -stdinpass
+}
+
+mount-encrypted-personal-rw()
+{
+  hdiutil attach ~/Dropbox/personal_encrypted.dmg -stdinpass
+}
+
+unmount-encrypted-personal()
+{
+  diskutil eject /Volumes/PersonalEncrypted
+}
+
+alias sumobuild=${SUMO_HOME}/bin/quick-assemble.sh -Cy -q
 alias sumopull=${SUMO_HOME}/bin/pull.sh
 alias sumopush=${SUMO_HOME}/bin/push-current-branch.sh
 alias sumojira='gl --author="Zhong Chen" --pretty=format:%s4m | grep -oE "^SUMO-[0-9]+" | head -1 | pbcopy'
