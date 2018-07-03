@@ -185,21 +185,14 @@ remove-fatal-warnings()
 export ENC_DRIVE_ROOT=/Volumes/Encrypted
 
 pr () {
-    if [ -n "$1" ]
-    then
+    if [ -n "$1" ]; then
         MERGE_BRANCH=$1 
     else
         MERGE_BRANCH="master" 
     fi
     CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD` 
-    open "https://github.com/Sanyaku/sumologic/compare/$MERGE_BRANCH...$CURRENT_BRANCH"
-}
-
-pr2 () {
-  if [ -n "$1" ]
-  REPO=${PWD##*/}
-  CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD` 
-  open "https://github.com/Sanyaku/$REPO/compare/master...$CURRENT_BRANCH"
+    REPO=`git remote -v | grep push | awk -F':' '{print $2}' | awk -F'.' '{print $1}'`
+    open "https://github.com/$REPO/compare/$MERGE_BRANCH...$CURRENT_BRANCH"
 }
 
 export QUICK_ASSEMBLE_NO_SNAPSHOTS=true
