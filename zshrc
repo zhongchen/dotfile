@@ -363,3 +363,8 @@ if which pyenv-virtualenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; f
 export ONE_PASSWORD_HACKY_INTEGRATION=OFF
 
 export AIRFLOW_HOME=~/airflow
+
+function push-current-branch()
+{
+    sh ~/Bitbucket/scripts/push-current-branch.sh
+}
