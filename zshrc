@@ -368,3 +368,5 @@ function push-current-branch()
 {
     sh ~/Bitbucket/scripts/push-current-branch.sh
 }
+
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
