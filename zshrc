@@ -173,10 +173,6 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 export PIP_REQUIRE_VIRTUALENV=false
 
-#set up for virtual env wrapper
-export WORKON_HOME=~/Experiment
-export PROJECT_HOME=~/Experiments
-
 remove-fatal-warnings()
 {
   sed -i '' '/fatal-warnings/d' .idea/scala_compiler.xml
