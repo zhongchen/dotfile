@@ -41,6 +41,7 @@ source $ZSH/oh-my-zsh.sh
 export DEV_HOME=~/Development
 export SUMO_HOME=~/Development/sumo
 export SUMO_KNOBS=~/Development/knobs
+export SUMO_ANALYTICS=~/Development/analytics-experiments
 export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
 export MAVEN_OPTS="-Xmx2g -Djava.awt.headless=true -XX:ReservedCodeCacheSize=512m"
 export PATH=/opt/local/bin:/usr/local/bin:$MVN_HOME/bin:$PATH
