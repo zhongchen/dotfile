@@ -46,6 +46,7 @@ export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
 export MAVEN_OPTS="-Xmx2g -Djava.awt.headless=true -XX:ReservedCodeCacheSize=512m"
 export PATH=/opt/local/bin:/usr/local/bin:$MVN_HOME/bin:$PATH
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/
+export GITHUB=~/Github
 
 # Note: ~/.ssh/environment should not be used, as it
 #       already has a different purpose in SSH.
