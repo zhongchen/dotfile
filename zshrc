@@ -368,3 +368,5 @@ function push-current-branch()
 }
 
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
