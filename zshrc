@@ -356,17 +356,29 @@ export PIPENV_VENV_IN_PROJECT=1
 # pyenv setup
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # sumo stuff
 export ONE_PASSWORD_HACKY_INTEGRATION=OFF
 
 export AIRFLOW_HOME=~/airflow
+export SLUGIFY_USES_TEXT_UNIDECODE=yes
 
 function push-current-branch()
 {
     sh ~/Bitbucket/scripts/push-current-branch.sh
 }
 
+function memory-analyzer()
+{
+  ~/tools/mat/MemoryAnalyzer.app/Contents/MacOS/MemoryAnalyzer -vmargs -Xmx16g -XX:-UseGCOverheadLimit
+}
+
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export NO_NEED_CDJENKINS=TRUE
