@@ -351,7 +351,7 @@ function deployAssembly()
 #docker-machine shell prompt
 #PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 
-export PIPENV_VENV_IN_PROJECT=1
+export PIPENV_VENV_IN_PROJECT="enabled"
 
 # pyenv setup
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
@@ -382,3 +382,8 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 export NO_NEED_CDJENKINS=TRUE
+
+export PATH=~/mongodb/bin:$PATH
+
+alias airflow-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-93-239-147.compute-1.amazonaws.com"
+alias app-server-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-84-55-78.compute-1.amazonaws.com"
