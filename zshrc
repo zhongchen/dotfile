@@ -45,7 +45,7 @@ export SUMO_ANALYTICS=~/Development/analytics-experiments
 export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
 export MAVEN_OPTS="-Xmx2g -Djava.awt.headless=true -XX:ReservedCodeCacheSize=512m"
 export PATH=/opt/local/bin:/usr/local/bin:$MVN_HOME/bin:$PATH
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/
 export GITHUB=~/Github
 
 # Note: ~/.ssh/environment should not be used, as it
@@ -387,3 +387,6 @@ export PATH=~/mongodb/bin:$PATH
 
 alias airflow-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-93-239-147.compute-1.amazonaws.com"
 alias app-server-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-84-55-78.compute-1.amazonaws.com"
+
+alias docker-stop-all="docker stop $(docker ps -a -q)"
+alias docker-rm-all="docker rm $(docker ps -a -q)"
