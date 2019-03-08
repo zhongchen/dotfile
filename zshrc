@@ -390,3 +390,5 @@ alias app-server-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-84-55-78
 
 alias docker-stop-all="docker stop $(docker ps -a -q)"
 alias docker-rm-all="docker rm $(docker ps -a -q)"
+
+export PATH=$HOME/bin:$PATH
