@@ -392,3 +392,6 @@ alias docker-stop-all="docker stop $(docker ps -a -q)"
 alias docker-rm-all="docker rm $(docker ps -a -q)"
 
 export PATH=$HOME/bin:$PATH
+if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+
+alias kbl='kubectl'
