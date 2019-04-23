@@ -14,7 +14,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws go docker)
+plugins=(git go docker docker-compose)
 
 # User configuration
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -23,7 +23,9 @@ export PATH=/Users/$USER/.local/bin:$PATH
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -348,9 +350,6 @@ function deployAssembly()
     sh ~/deploy.sh
 }
 
-#docker-machine shell prompt
-#PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
-
 export PIPENV_VENV_IN_PROJECT="enabled"
 
 # pyenv setup
@@ -377,9 +376,6 @@ function memory-analyzer()
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 export NO_NEED_CDJENKINS=TRUE
 
