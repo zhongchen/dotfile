@@ -49,7 +49,7 @@ if WINDOWS()
     let path='~/vimfiles/bundle'
     call vundle#begin(path)
 else
-    set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim/
+    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 endif
 
 if dein#load_state(expand('~/.vim/bundles'))
