@@ -391,3 +391,9 @@ export PATH=$HOME/bin:$PATH
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 alias kbl='kubectl'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/zhongchen/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zhongchen/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/zhongchen/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zhongchen/google-cloud-sdk/completion.zsh.inc'; fi
