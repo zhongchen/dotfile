@@ -99,6 +99,8 @@ fi
 
 unset env
 
+function exists { which $1 &> /dev/null }
+
 # Git alias
 alias g="git status"
 alias ga="git add"
@@ -160,9 +162,6 @@ unmount-encrypted-personal()
   diskutil eject /Volumes/PersonalEncrypted
 }
 
-alias sumobuild=${SUMO_HOME}/bin/quick-assemble.sh -Cy -q
-alias sumopull=${SUMO_HOME}/bin/pull.sh
-alias sumopush=${SUMO_HOME}/bin/push-current-branch.sh
 alias sumojira='gl --author="Zhong Chen" --pretty=format:%s4m | grep -oE "^SUMO-[0-9]+" | head -1 | pbcopy'
 alias deletemergedbranches='git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'
 
@@ -186,11 +185,11 @@ export ENC_DRIVE_ROOT=/Volumes/Encrypted
 
 pr () {
     if [ -n "$1" ]; then
-        MERGE_BRANCH=$1 
+        MERGE_BRANCH=$1
     else
-        MERGE_BRANCH="master" 
+        MERGE_BRANCH="master"
     fi
-    CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD` 
+    CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
     REPO=`git remote -v | grep push | awk -F':' '{print $2}' | awk -F'.' '{print $1}'`
     open "https://github.com/$REPO/compare/$MERGE_BRANCH...$CURRENT_BRANCH"
 }
@@ -211,20 +210,20 @@ function frameworkpython {
 }
 
 # Search in all files matching `.log` under the given directory
- alias logsearch='find | grep "\.log$" | xargs grep'
+alias logsearch='find | grep "\.log$" | xargs grep'
 
 # # Tail all files matching `.log` under the given directory
- alias logtail='find | grep "\.log$" | xargs tail -f'
+alias logtail='find | grep "\.log$" | xargs tail -f'
 
- export TERM=xterm-256color
- export EDITOR=vim
+export TERM=xterm-256color
+export EDITOR=vim
 
  # Use Homebrew's directories instead of ~/.jenv for configs. This is optional.
 export JENV_ROOT=/usr/local/var/jenv
  # # Enable shims and autocompletion for jenv.
-if which jenv > /dev/null; 
-then 
- eval "$(jenv init - --no-rehash)"; 
+if exists jenv;
+then
+ eval "$(jenv init - --no-rehash)";
  (jenv rehash &) 2> /dev/null
 fi
 
@@ -246,8 +245,6 @@ function ppkill() {
     fi
     ppgrep $QUERY | xargs kill $*
 }
-
-function exists { which $1 &> /dev/null }
 
 if exists peco; then
     function peco_select_history() {
@@ -319,7 +316,6 @@ PERL_MM_OPT="INSTALL_BASE=/Users/zhong/perl5"; export PERL_MM_OPT;
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-alias dsh="${SUMO_HOME}/ops/bin/dsh.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -391,6 +387,11 @@ export PATH=$HOME/bin:$PATH
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
 alias kbl='kubectl'
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+DEFAULT_USER=$(whoami)
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/zhongchen/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zhongchen/google-cloud-sdk/path.zsh.inc'; fi
