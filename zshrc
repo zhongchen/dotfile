@@ -40,14 +40,10 @@ export LANG=en_US.UTF-8
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-export DEV_HOME=~/Development
-export SUMO_HOME=~/Development/sumo
-export SUMO_KNOBS=~/Development/knobs
-export SUMO_ANALYTICS=~/Development/analytics-experiments
-export MVN_HOME=/Users/zhong/Development/sumo/bin/apache-maven-3.3.3
+export MVN_HOME=/Users/$USER/apache-maven-3.6.2
 export MAVEN_OPTS="-Xmx2g -Djava.awt.headless=true -XX:ReservedCodeCacheSize=512m"
 export PATH=/opt/local/bin:/usr/local/bin:$MVN_HOME/bin:$PATH
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/
 export GITHUB=~/Github
 
 # Note: ~/.ssh/environment should not be used, as it
