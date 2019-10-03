@@ -14,7 +14,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git go docker docker-compose kubectl)
+plugins=(terraform git go docker docker-compose kubectl)
 
 # User configuration
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -160,6 +160,7 @@ unmount-encrypted-personal()
 
 alias sumojira='gl --author="Zhong Chen" --pretty=format:%s4m | grep -oE "^SUMO-[0-9]+" | head -1 | pbcopy'
 alias deletemergedbranches='git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'
+alias push-current-branch="~/scripts/bin/push-current-branch.sh"
 
 # Run an individual unit test when in the relevant module directory eg:
 # unittest ReliableCuratorLockTest
@@ -394,3 +395,8 @@ if [ -f '/Users/zhongchen/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zhong
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/zhongchen/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zhongchen/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias tf="terraform"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /Users/zhongchen/bin/terraform terraform
