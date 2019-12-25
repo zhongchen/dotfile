@@ -400,3 +400,37 @@ alias tf="terraform"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /Users/zhongchen/bin/terraform terraform
+
+
+function zhong-gcp () {
+ gcloud config configurations activate default
+ export GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/zhong-gcp-746d1bde4686.json
+ gcloud config configurations list
+ kbl config use-context gke_zhong-gcp_us-west1-a_cluster-1
+}
+
+function roche-gcp-ptd () {
+ gcloud config configurations activate roche
+ export GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/gred-ptddtalak-sb-001-e4372d8c-ca394a3eaa2a.json
+ gcloud config set project gred-ptddtalak-sb-001-e4372d8c
+ gcloud config configurations list
+}
+
+function dhaval-gcp () {
+ gcloud config configurations activate dhaval-gcp
+ gcloud config configurations list
+ kbl config use-context gke_google.com:testdhaval_us-west1-a_zhong-k8s-es
+}
+
+function roche-gcp-reindeer () {
+ gcloud config configurations activate roche
+ export GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/gred-ptddtalak-sb-001-e4372d8c-ca394a3eaa2a.json
+ gcloud config set project pti-reindeer-sb-001-6e165697
+ gcloud config configurations list
+}
+
+function start-dataproc () {
+ pushd ~/github/zhongchen/dataproc-kedro-demo
+ ./start-dataproc.sh $@
+ popd
+}
