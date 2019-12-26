@@ -434,3 +434,6 @@ function start-dataproc () {
  ./start-dataproc.sh $@
  popd
 }
+
+alias zhong-tensorflow='gcloud beta compute --project "zhong-gcp" ssh --zone "us-west1-b" "zhong-tensorflow"'
+
