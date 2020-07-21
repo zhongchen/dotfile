@@ -418,6 +418,7 @@ function roche-gcp-ptd () {
 
 function dhaval-gcp () {
  gcloud config configurations activate dhaval-gcp
+ export GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/google.com_testdhaval-67a1aa9f907c.json
  gcloud config configurations list
  kbl config use-context gke_google.com:testdhaval_us-west1-a_zhong-k8s-es
 }
@@ -426,6 +427,13 @@ function roche-gcp-reindeer () {
  gcloud config configurations activate roche
  export GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/gred-ptddtalak-sb-001-e4372d8c-ca394a3eaa2a.json
  gcloud config set project pti-reindeer-sb-001-6e165697
+ gcloud config configurations list
+}
+
+function roche-gcp-adm () {
+ gcloud config configurations activate roche
+ export GOOGLE_APPLICATION_CREDENTIALS=~/Downloads/gred-ptddtalak-sb-001-e4372d8c-ca394a3eaa2a.json
+ gcloud config set project gred-ptddtalak-adm-01-b14b1f74
  gcloud config configurations list
 }
 
