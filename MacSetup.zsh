@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 brew update
 
@@ -19,12 +19,18 @@ ln -sf ~/dotfile/tmux.conf ~/.tmux.conf
 ln -sf ~/dotfile/zshrc ~/.zshrc
 ln -sf ~/dotfile/gitconfig ~/.gitconfig
 ln -sf ~/dotfile/vimrc ~/.vimrc
-ln -sf ~/dotfile/vim ~/.vim
+# ln -sf ~/dotfile/vim ~/.vim
 
 if ! [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     brew install zsh-syntax-highlighting
 fi
 
+declare -A gui_tools
+gui_tools[mvim]=macvim 
+
+for key value in ${(kv)gui_tools}; do
+    echo "$key -> $value"
+done
 
 
 # https://github.com/agnoster/agnoster-zsh-theme/issues/123
