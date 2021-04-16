@@ -296,8 +296,6 @@ till_failure () {
     return $EXIT_CODE
 }
 
-alias vim="/usr/local/bin/vim"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -347,13 +345,7 @@ if which pyenv-virtualenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; f
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 
-export AIRFLOW_HOME=~/airflow
 export SLUGIFY_USES_TEXT_UNIDECODE=yes
-
-function push-current-branch()
-{
-    sh ~/Bitbucket/scripts/push-current-branch.sh
-}
 
 function memory-analyzer()
 {
@@ -365,11 +357,6 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export NO_NEED_CDJENKINS=TRUE
-
-export PATH=~/mongodb/bin:$PATH
-
-alias airflow-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-93-239-147.compute-1.amazonaws.com"
-alias app-server-node="ssh -i ~/hackthon/datawarehouse.pem ubuntu@ec2-3-84-55-78.compute-1.amazonaws.com"
 
 alias docker-stop-all="docker stop $(docker ps -a -q)"
 alias docker-rm-all="docker rm $(docker ps -a -q)"
@@ -383,23 +370,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 DEFAULT_USER=$(whoami)
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/zhongchen/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zhongchen/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/zhongchen/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zhongchen/google-cloud-sdk/completion.zsh.inc'; fi
-
 alias tf="terraform"
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/zhongchen/bin/terraform terraform
-
-
-
-function start-dataproc () {
- pushd ~/github/zhongchen/dataproc-kedro-demo
- ./start-dataproc.sh $@
- popd
-}
 
