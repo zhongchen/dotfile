@@ -373,3 +373,5 @@ DEFAULT_USER=$(whoami)
 alias tf="terraform"
 
 
+# Kong setup
+saml2aws login -p kong-cloud-01-dev --role arn:aws:iam::727954360595:role/konnect-developer --skip-prompt --force 

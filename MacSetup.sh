@@ -4,7 +4,7 @@ brew update
 
 ### setup Mac environment
 tools=("kubectl" "kubectx" "pyenv" "tmux" "ssh-copy-id" \
-  "curl" "git" "wget" "zinc" "percol")
+  "curl" "git" "wget" "zinc" "percol" "kind" "helm")
 
 for tool in ${tools[*]}; do
     if ! command -v "${tool}" &> /dev/null
