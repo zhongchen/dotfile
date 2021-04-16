@@ -29,7 +29,11 @@ declare -A gui_tools
 gui_tools[mvim]=macvim 
 
 for key value in ${(kv)gui_tools}; do
-    echo "$key -> $value"
+    if ! command -v "${key}" &> /dev/null
+    then
+    echo "Installing ${value}"
+    brew install --cask "$key"
+    fi
 done
 
 
