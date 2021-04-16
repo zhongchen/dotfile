@@ -226,11 +226,11 @@ fi
 
 function ppgrep() {
     if [[ $1 == "" ]]; then
-        PECO=peco
+        PERCOL=percol
     else
-        PECO="peco --query $1"
+        PERCOL="percol --query $1"
     fi
-    ps aux | eval $PECO | awk '{ print $2 }'
+    ps aux | eval $PERCOL | awk '{ print $2 }'
 }
 
 function ppkill() {
@@ -243,17 +243,17 @@ function ppkill() {
     ppgrep $QUERY | xargs kill $*
 }
 
-if exists peco; then
-    function peco_select_history() {
+if exists percol; then
+    function percol_select_history() {
         local tac
         exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
         CURSOR=$#BUFFER         # move cursor
         zle -R -c               # refresh
     }
 
-    zle -N peco_select_history
-    bindkey '^R' peco_select_history
+    zle -N percol_select_history
+    bindkey '^R' percol_select_history
 fi
 
 function pattach() {
