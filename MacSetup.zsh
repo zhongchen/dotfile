@@ -4,7 +4,8 @@ brew update
 
 ### setup Mac environment
 tools=("kubectl" "kubectx" "pyenv" "tmux" "ssh-copy-id" \
-  "curl" "git" "wget" "zinc" "percol" "kind" "helm")
+  "curl" "git" "wget" "zinc" "percol" "kind" "helm" "jq" \
+  "npm" "yarn" "node" "go")
 
 for tool in ${tools[*]}; do
     if ! command -v "${tool}" &> /dev/null
@@ -25,6 +26,18 @@ if ! [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     brew install zsh-syntax-highlighting
 fi
 
+declare -A tools_mapping
+tools_mapping[rg]=ripgrep
+tools_mapping[ag]=the_silver_searcher
+
+for key value in ${(kv)tools_mapping}; do
+    if ! command -v "${key}" &> /dev/null
+    then
+    echo "Installing ${value}"
+    brew install "$key"
+    fi
+done
+
 declare -A gui_tools
 gui_tools[mvim]=macvim 
 
@@ -42,12 +55,3 @@ done
 # https://github.com/powerline/fonts
 
 echo "Done"
-
-
-
-# # fast grep
-# brew install the_silver_searcher
-# brew install ripgrep
-
-
-

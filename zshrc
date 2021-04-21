@@ -105,7 +105,7 @@ alias gau="git add -u"
 alias gc="git commit -m"
 alias gcamend="git commit --amend --no-edit"
 alias gbd="git branch -D"
-alias gb="git branch | peco | xargs git checkout"
+alias gb="git branch | percol | xargs git checkout"
 alias gch="git checkout"
 alias gchb="git checkout -b"
 alias gt="git stash"
@@ -258,15 +258,15 @@ fi
 
 function pattach() {
     if [[ $1 == "" ]]; then
-        PECO=peco
+        PERCOL=percol
     else
-        PECO="peco --query $1"
+        PERCOL="percol --query $1"
     fi
 
     sessions=$(tmux ls)
     [ $? -ne 0 ] && return
 
-    session=$(echo $sessions | eval $PECO | cut -d : -f 1)
+    session=$(echo $sessions | eval $PERCOL | cut -d : -f 1)
     if [[ -n "$session" ]]; then
         tmux att -t $session
     fi
@@ -372,6 +372,7 @@ DEFAULT_USER=$(whoami)
 
 alias tf="terraform"
 
+export PATH=~/.local/bin:$PATH
 
 # Kong setup
-saml2aws login -p kong-cloud-01-dev --role arn:aws:iam::727954360595:role/konnect-developer --skip-prompt --force 
+alias kong=~/scripts/bin/kong.sh
