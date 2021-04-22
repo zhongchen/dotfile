@@ -379,3 +379,6 @@ alias kong=~/scripts/bin/kong.sh
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# use git as an alias for hub
+eval "$(hub alias -s)"
