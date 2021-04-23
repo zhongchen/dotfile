@@ -382,3 +382,9 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 # use git as an alias for hub
 eval "$(hub alias -s)"
+
+# gojira env setup
+export PATH=$PATH:/Users/zhong.chen/kong/gojira-enterprise
+export PATH=$PATH:/Users/zhong.chen/kong/gojira-enterprise/extra
+export GOJIRA_REPO="kong-ee"
+export GOJIRA_PLUGINS="enterprise"
