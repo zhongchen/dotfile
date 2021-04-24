@@ -29,6 +29,7 @@ fi
 declare -A tools_mapping
 tools_mapping[rg]=ripgrep
 tools_mapping[ag]=the_silver_searcher
+tools_mapping[http]=httpie
 
 for key value in ${(kv)tools_mapping}; do
     if ! command -v "${key}" &> /dev/null

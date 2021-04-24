@@ -375,7 +375,7 @@ alias tf="terraform"
 export PATH=~/.local/bin:$PATH
 
 # Kong setup
-alias kong=~/scripts/bin/kong.sh
+alias kong-login=~/scripts/bin/kong.sh
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
