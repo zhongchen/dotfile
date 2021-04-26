@@ -364,8 +364,6 @@ alias docker-rm-all="docker rm $(docker ps -a -q)"
 export PATH=$HOME/bin:$PATH
 if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
 
-alias kbl='kubectl'
-
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 DEFAULT_USER=$(whoami)
@@ -379,6 +377,8 @@ alias kong-login=~/scripts/bin/kong.sh
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # use git as an alias for hub
 eval "$(hub alias -s)"

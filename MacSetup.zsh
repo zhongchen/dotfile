@@ -5,7 +5,8 @@ brew update
 ### setup Mac environment
 tools=("kubectl" "kubectx" "pyenv" "tmux" "ssh-copy-id" \
   "curl" "git" "wget" "zinc" "percol" "kind" "helm" "jq" \
- "npm" "yarn" "node" "go" "volta" "pre-commit" "hub" "luarocks")
+  "npm" "yarn" "node" "go" "volta" "pre-commit" "hub" "luarocks" \
+  "virtualenv")
 
 for tool in ${tools[*]}; do
     if ! command -v "${tool}" &> /dev/null
