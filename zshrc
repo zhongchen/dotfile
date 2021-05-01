@@ -184,7 +184,7 @@ pr () {
     if [ -n "$1" ]; then
         MERGE_BRANCH=$1
     else
-        MERGE_BRANCH="master"
+        MERGE_BRANCH="main"
     fi
     CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
     REPO=`git remote -v | grep push | awk -F':' '{print $2}' | awk -F'.' '{print $1}'`
