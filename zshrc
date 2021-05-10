@@ -388,3 +388,6 @@ export PATH=$PATH:/Users/zhong.chen/kong/gojira-enterprise
 export PATH=$PATH:/Users/zhong.chen/kong/gojira-enterprise/extra
 export GOJIRA_REPO="kong-ee"
 export GOJIRA_PLUGINS="enterprise"
+
+# auto-completion for saml2aws
+eval "$(saml2aws --completion-script-zsh)"
