@@ -161,6 +161,7 @@ unmount-encrypted-personal()
 alias sumojira='gl --author="Zhong Chen" --pretty=format:%s4m | grep -oE "^SUMO-[0-9]+" | head -1 | pbcopy'
 alias deletemergedbranches='git branch --merged | grep -v "\*" | grep -v "master" | xargs -n 1 git branch -d'
 alias push-current-branch="~/scripts/bin/push-current-branch.sh"
+alias krsync="~/scripts/bin/krsync.sh"
 
 # Run an individual unit test when in the relevant module directory eg:
 # unittest ReliableCuratorLockTest
@@ -391,3 +392,6 @@ export GOJIRA_PLUGINS="enterprise"
 
 # auto-completion for saml2aws
 eval "$(saml2aws --completion-script-zsh)"
+
+function pod() { k exec $1 -it -- bash }
+function klogs() { k logs --follow $1 }
